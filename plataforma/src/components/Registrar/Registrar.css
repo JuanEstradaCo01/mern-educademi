@@ -1,0 +1,46 @@
+.contenedorFormRegistrar{
+    height: 100vh;
+    background-color: rgb(3, 117, 170);
+    padding: 3rem;
+}
+
+.subContenedorRegistrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30rem;
+    margin: auto;
+    background-color: white;
+    border-radius: 1rem;
+    h2{
+        margin: 1rem auto;
+        color: rgb(0, 183, 255);
+        font-weight: bolder;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        padding: 0rem 1rem 2rem 1rem;
+        label{
+            margin: 1rem;
+            font-weight: bolder;
+            input{
+                color: white;
+                margin-left: .5rem;
+                width: 20rem;
+                border-color: transparent;
+                padding: .5rem;
+                border-radius: .5rem;
+                background-color: black;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+.btnRegistrar{
+    margin: 1rem auto 0rem auto;
+    width: 40%;
+}

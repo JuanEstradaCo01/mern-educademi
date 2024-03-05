@@ -1,0 +1,17 @@
+footer{
+    background-color: white;
+    bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+.contenedorFooter{
+    display: flex;
+}
+
+.contenedorNosotrosRedesFooter{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+}

@@ -1,0 +1,50 @@
+.contenedorFormularioIngresar{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    margin: auto;
+    background-color: rgb(88, 85, 85);
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        height: 70%;
+        .labelIngresar{
+            display: flex;
+            flex-direction: column;
+            margin: .8rem;
+            font-size: 1.2rem;
+            input{
+                padding: .3rem;
+                border-radius: .5rem;
+                border-color: transparent;
+                margin-top: .5rem;
+            }
+        }
+    }
+    h2{
+        height: 10%;
+        margin-top: 2rem;
+    }
+}
+
+.contenedorIngresar{
+    height: 25rem;
+    border-radius: 1rem;
+    background-color: rgb(37, 37, 37);
+    color: white;
+    width: 20rem;
+    margin: auto;
+}
+
+.main{
+    height: 85vh;
+}
+
+.btnIngresar{
+    margin: 1rem auto;
+    width: 40%;
+}

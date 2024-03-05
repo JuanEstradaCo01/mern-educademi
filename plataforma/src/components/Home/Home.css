@@ -1,0 +1,7 @@
+#grilla{
+    display: grid;
+    grid-template-areas:
+    "main main aside"
+    "main2 main2 main2"
+    "publicidad publicidad publicidad";
+}
