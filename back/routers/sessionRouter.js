@@ -1,20 +1,40 @@
 const { Router } = require("express")
+const userModel = require("../models/userModel")
+const { createHash, isValidPassword } = require("../utils/hasheo")
+const UserDao = require("../dao/UserManager.js")
+const userDao =  new UserDao()
 
 const sessionRouter = Router()
 
-sessionRouter.post("/register", (req, res) => {
+sessionRouter.post("/register", async (req, res) => {
     try{
         let {names, lastNames, age, email, phone, password} = req.body
 
-        if(names === "" || lastNames === "" || age === "" || email === "" || phone === "" || password === ""){
+        //Valido si el email ya existe:
+        const users = await userDao.getUsers()
+        const findUser = users.find(item=>item.email === email)
+        if(findUser){
             let body = req.body
+            body.message = "Email ya registrado"
             body.code = 401
             return res.status(401).json(body)
         }
-        const body = req.body
-        body.code = 301
+
+        //Valido que se llenaron todos los campos:
+        if(names === "" || lastNames === "" || age === "" || email === "" || phone === "" || password === ""){
+            let body = req.body
+            body.message = "Completa todos los campos"
+            body.code = 401
+            return res.status(401).json(body)
+        }
+
+        //Encripto la contraseña y envio a la base de datos el usuario aprovado:
+        const user = req.body
+        user.password = createHash(user.password)
+        await userModel.insertMany(user)
+        user.code = 301
         
-        return res.status(301).json(body)
+        return res.status(301).json(user)
     }catch(e){
         return res.status(500).json({
             error: "Ocurrio un error al registrarse", e
@@ -22,24 +42,39 @@ sessionRouter.post("/register", (req, res) => {
     }
 })
 
-sessionRouter.post("/login", (req, res) => {
+sessionRouter.post("/login", async(req, res) => {
     try {
         let body = req.body
-        const usuario = "mariana"
 
-        if (body.user !== usuario) {
-            console.log("Usuario no encontrado")
-            return res.status(404).json({
-                NotFound: "usuario no encontrado",
-                code: 404
-            })
+        let {user,pass} = req.body
+        if(user === "" || pass === ""){
+            let body = req.body
+            body.message = "Completa todos los campos"
+            body.code = 404
+            return res.status(404).json(body)
+        }
+    
+        const users = await userDao.getUsers()
+        const findUser = users.find(item=>item.email === body.user)
+        
+        //Valido si existe el correo en la DB:
+        if(!findUser){
+            body.code = 404
+            body.message = "Usuario no registrado"
+            return res.status(401).json(body)
         }
 
-        console.log("Iniciaste sesion")
-        return res.status(301).json({
-            user: body.user,
-            code: 301
-        })
+        //Valido si la contraseña es correcta:
+        if(!isValidPassword(body.pass, findUser.password)){
+            body.code = 404
+            body.message = "Contraseña incorrecta"
+            return res.status(401).json(body)
+        }
+
+        body.code = 301
+        delete body.pass
+    
+        return res.status(301).json(body)
     } catch (e) {
         return res.status(500).json({
             error: "Ocurrio un error al iniciar sesion", e

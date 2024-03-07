@@ -28,16 +28,6 @@ function Registrar() {
         })
     }
 
-    const notifyError = () => {
-        MySwal.fire({
-            show: true,
-            title: "Ingresa todos los datos",
-            text: "Un dato o los datos ingresados no son validos",
-            icon: "error",
-            showConfirmButton: true
-        })
-    }
-
     const registrarme = async (evt) => {
         evt.preventDefault()
 
@@ -66,7 +56,12 @@ function Registrar() {
                     notifySuccess()
                     navigate("/ingresar")
                 } else if (data.code === 401) {
-                    notifyError()
+                    MySwal.fire({
+                        show: true,
+                        title: `${data.message}`,
+                        icon: "error",
+                        showConfirmButton: true
+                    })
                 }
             })
             .catch((e) => {

@@ -2,6 +2,8 @@ import "./Ingresar.css"
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
+import withReactComponent from "sweetalert2-react-content"
 
 function Ingresar() {
 
@@ -10,6 +12,7 @@ function Ingresar() {
     const [data, setData] = useState({})
     const navigate = useNavigate();
 
+    const MySwal = withReactComponent(Swal)
 
     const ingresar = async (evt) => {
         evt.preventDefault()
@@ -28,18 +31,24 @@ function Ingresar() {
             },
             body: JSON.stringify(data),
         })
-          .then(res => res.json())
-          .then(data => {
-            setData(data)
-            if(data.code === 301){
-                return navigate("/user")
-            }
-
-            navigate("/ingresar")
-          })
-          .catch((e) => {
-            console.log(e)
-          })
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 301) {
+                    setData(data)
+                    console.log(data)
+                    return navigate("/user")
+                } else if (data.code === 404) {
+                    MySwal.fire({
+                        show: true,
+                        title: `<strong>${data.message}</strong>`,
+                        icon: "error",
+                        showConfirmButton: true
+                    })
+                }
+            })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 
 
@@ -51,13 +60,13 @@ function Ingresar() {
                     <form id="formIngresar">
                         <label className="labelIngresar">
                             Usuario:
-                            <input id="usuarioIngresar" onChange={(e) => {setUser(e.target.value)}} type="text" name="usuario" placeholder=" eje: mail@mail.com" required />
+                            <input id="usuarioIngresar" onChange={(e) => { setUser(e.target.value) }} type="text" name="usuario" placeholder=" eje: mail@mail.com" required />
                         </label>
                         <label className="labelIngresar">
                             Contraseña:
-                            <input id="usuarioContra" onChange={(e) => {setPass(e.target.value)}} type="password" name="password" placeholder=" Contraseña" required />
+                            <input id="usuarioContra" onChange={(e) => { setPass(e.target.value) }} type="password" name="password" placeholder=" Contraseña" required />
                         </label>
-                
+
                         <Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar">Ingresar</Button>
                     </form>
                 </div>
