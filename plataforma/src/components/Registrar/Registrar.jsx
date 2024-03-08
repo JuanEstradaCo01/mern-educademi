@@ -51,14 +51,14 @@ function Registrar() {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.code === 301) {
+                if (data.code === 201) {
                     setData(data)
                     notifySuccess()
                     navigate("/ingresar")
                 } else if (data.code === 401) {
                     MySwal.fire({
                         show: true,
-                        title: `${data.message}`,
+                        title: `<strong>${data.message}</strong>`,
                         icon: "error",
                         showConfirmButton: true
                     })

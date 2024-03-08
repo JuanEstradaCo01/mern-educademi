@@ -32,9 +32,9 @@ sessionRouter.post("/register", async (req, res) => {
         const user = req.body
         user.password = createHash(user.password)
         await userModel.insertMany(user)
-        user.code = 301
+        user.code = 201
         
-        return res.status(301).json(user)
+        return res.status(201).json(user)
     }catch(e){
         return res.status(500).json({
             error: "Ocurrio un error al registrarse", e
@@ -71,7 +71,9 @@ sessionRouter.post("/login", async(req, res) => {
             return res.status(401).json(body)
         }
 
+        req.session.user = findUser._id.toString()
         body.code = 301
+        body.uid = findUser._id.toString()
         delete body.pass
     
         return res.status(301).json(body)
@@ -80,6 +82,21 @@ sessionRouter.post("/login", async(req, res) => {
             error: "Ocurrio un error al iniciar sesion", e
         })
     }
+})
+
+sessionRouter.get("/logout", (req, res) => {
+    req.session.destroy( e => {
+        const logout = {
+            message: "Logout OK"
+        }
+        if(!e){
+            console.log("Sesion cerrada")
+            return res.status(200).json(logout)
+        }
+        else {
+            return res.status(500).json({error: "Logout Error", e})
+        }
+    })
 })
 
 module.exports = sessionRouter

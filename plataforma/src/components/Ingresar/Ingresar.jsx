@@ -35,8 +35,7 @@ function Ingresar() {
             .then(data => {
                 if (data.code === 301) {
                     setData(data)
-                    console.log(data)
-                    return navigate("/user")
+                    navigate(`/user/${data.uid}`)
                 } else if (data.code === 404) {
                     MySwal.fire({
                         show: true,

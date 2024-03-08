@@ -2,6 +2,7 @@ const server = require("express")
 const session = require("express-session")
 const cors = require("cors")
 const sessionRouter = require("./routers/sessionRouter")
+const userRouter = require("./routers/userRouter")
 const MongoSingleton = require("./config/singleton") 
 require("dotenv").config()
 
@@ -31,3 +32,4 @@ app.get("/healthCheck", (req, res) => {
 })
 
 app.use("/", sessionRouter)
+app.use("/", userRouter)

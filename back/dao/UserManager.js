@@ -9,8 +9,8 @@ class UserManager {
         return this.model.find()
     }
 
-    async getUserById(id){
-        return this.model.findById(id)
+    async getUserById(uid){
+        return this.model.findById(uid)
     }
 }
 
