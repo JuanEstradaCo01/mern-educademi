@@ -1,5 +1,4 @@
 const server = require("express")
-const session = require("express-session")
 const cors = require("cors")
 const sessionRouter = require("./routers/sessionRouter")
 const userRouter = require("./routers/userRouter")
@@ -14,11 +13,6 @@ const app = server()
 app.use(cors())
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
-app.use(session({
-    secret: "secretKey",
-    resave: true,
-    saveUninitialized: true
-}))
 
 const PORT = process.env.PORT || 8080
 
