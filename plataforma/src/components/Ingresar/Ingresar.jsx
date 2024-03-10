@@ -35,15 +35,22 @@ function Ingresar() {
             .then(data => {
                 if (data.code === 301) {
                     setData(data)
-                    navigate(`/user/${data.uid}`)
-                } else if (data.code === 404) {
+                    navigate(`/user/${data.uid}/${data.token}`)
+                }else if (data.code === 404) {
                     MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,
                         icon: "error",
                         showConfirmButton: true
                     })
-                }
+                }else if (data.code === 401) {
+                    MySwal.fire({
+                        show: true,
+                        title: `<strong>${data.message}</strong>`,
+                        icon: "error",
+                        showConfirmButton: true
+                    })
+                }              
             })
             .catch((e) => {
                 console.log(e)

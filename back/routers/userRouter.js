@@ -6,22 +6,29 @@ const jwt = require("jsonwebtoken")
 const userRouter = Router()
 
 function validateToken(req, res, next) {
+    console.log(token)
     const accessToken = req.headers['authToken']
-    console.log(accessToken)
-    if(!accessToken){
-        return res.status(401).json({message: "Acceso negado"})
+    console.log(req.headers['authToken'])
+    if (!accessToken) {
+        return res.status(401).json({
+            code: 401,
+            message: "Acceso negado"
+        })
     }
 
-    jwt.verify(accessToken, process.env.SECRET_KEY, ( err, success) => {
-        if(err){
-            res.status(401).json({message: "Acceso negado, el token es incorrecto o expiró"})
-        }else{
+    jwt.verify(accessToken, process.env.SECRET_KEY, (err, success) => {
+        if (err) {
+            res.status(401).json({
+                code: 401,
+                message: "Acceso negado, el token es incorrecto o expiró"
+            })
+        } else {
             next()
         }
     })
 }
 
-userRouter.get("/users",async (req, res) => {
+userRouter.get("/users", async (req, res) => {
     try {
         const users = await userDao.getUsers()
 
@@ -31,27 +38,44 @@ userRouter.get("/users",async (req, res) => {
     }
 })
 
-userRouter.get("/user/:uid", validateToken, async (req, res) => {
+userRouter.get("/user/:uid/:token", async (req, res) => {
     const uid = req.params.uid
+    const accessToken = req.params.token
 
-    try {
-        const users = await userDao.getUsers()
-        let user = users.find(item => item._id == uid)
-
-        if (!user) {
-            return res.status(404).json({
-                message: "El usuario no fue encontrado"
-            })
-        }
-
-        user = user.toObject()
-        delete user.password
-        user.code = 200
-
-        return res.status(200).json(user)
-    } catch (e) {
-        return res.status(500).json({ Error: "Ocurrio un error al buscar el usuario", e })
+    if (!accessToken) {
+        return res.status(401).json({
+            code: 401,
+            message: "Acceso negado"
+        })
     }
+
+    jwt.verify(accessToken, process.env.SECRET_KEY, async(err, success) => {
+        if (err) {
+            res.status(401).json({
+                code: 401,
+                message: "Acceso negado, el token es incorrecto o expiró"
+            })
+        } else {
+            try {
+                const users = await userDao.getUsers()
+                let user = users.find(item => item._id == uid)
+
+                if (!user) {
+                    return res.status(404).json({
+                        message: "El usuario no fue encontrado"
+                    })
+                }
+
+                user = user.toObject()
+                delete user.password
+                user.code = 200
+
+                return res.status(200).json(user)
+            } catch (e) {
+                return res.status(500).json({ Error: "Ocurrio un error al buscar el usuario", e })
+            }
+        }
+    })
 })
 
 module.exports = userRouter

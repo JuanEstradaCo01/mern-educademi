@@ -5,6 +5,7 @@ import Loader from "../Loader/Loader"
 
 function Profile() {
 
+    const { token } = useParams()
     const { uid } = useParams()
 
     const [user, setUser] = useState("")
@@ -12,7 +13,7 @@ function Profile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`/user/${uid}`)
+        fetch(`/user/${uid}/${token}`)
           .then(res => res.json())
           .then(data => {
             if(data.code !== 200){
