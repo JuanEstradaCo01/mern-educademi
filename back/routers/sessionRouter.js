@@ -42,7 +42,7 @@ sessionRouter.post("/register", async (req, res) => {
         return res.status(201).json(user)
     } catch (e) {
         return res.status(500).json({
-            error: "Ocurrio un error al registrarse", e
+            message: "Ocurrio un error al registrarse, intentalo nuevamente"
         })
     }
 })

@@ -13,7 +13,6 @@ function Registrar() {
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [pass, setPass] = useState("")
-    const [data, setData] = useState({})
 
     const navigate = useNavigate();
 
@@ -52,10 +51,9 @@ function Registrar() {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 201) {
-                    setData(data)
                     notifySuccess()
                     navigate("/ingresar")
-                } else if (data.code === 401) {
+                } else if (data.code === 401 || 500) {
                     MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,

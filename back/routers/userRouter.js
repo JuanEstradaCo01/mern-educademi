@@ -5,29 +5,6 @@ const jwt = require("jsonwebtoken")
 
 const userRouter = Router()
 
-function validateToken(req, res, next) {
-    console.log(token)
-    const accessToken = req.headers['authToken']
-    console.log(req.headers['authToken'])
-    if (!accessToken) {
-        return res.status(401).json({
-            code: 401,
-            message: "Acceso negado"
-        })
-    }
-
-    jwt.verify(accessToken, process.env.SECRET_KEY, (err, success) => {
-        if (err) {
-            res.status(401).json({
-                code: 401,
-                message: "Acceso negado, el token es incorrecto o expiró"
-            })
-        } else {
-            next()
-        }
-    })
-}
-
 userRouter.get("/users", async (req, res) => {
     try {
         const users = await userDao.getUsers()

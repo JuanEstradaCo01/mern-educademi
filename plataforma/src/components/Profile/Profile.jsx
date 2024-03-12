@@ -1,12 +1,18 @@
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
+import { userContext } from "../context/context"
 import "./Profile.css"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import Loader from "../Loader/Loader"
 
 function Profile() {
 
+    const { agregarToken, agregarId, borrarTokenID } = useContext(userContext)
+
     const { token } = useParams()
     const { uid } = useParams()
+
+    agregarToken(token)
+    agregarId(uid)
 
     const [user, setUser] = useState("")
 
@@ -37,6 +43,7 @@ function Profile() {
             <p><strong>Apellidos:</strong> {user.lastNames} </p>
             <p><strong>Edad: </strong> {user.age}</p>
             <p><strong>Email: </strong> {user.email}</p>
+            <Link to={"/ingresar"}><button onClick={borrarTokenID}>Cerrar sesión</button></Link>
         </>
     )
 }

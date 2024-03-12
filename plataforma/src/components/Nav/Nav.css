@@ -54,11 +54,20 @@
 }
 
 .homeSvg:hover{
-    color: rgb(179, 174, 174);
+    color: rgb(3, 156, 156);
     transition: all .1s;
 }
 
 a{
     text-decoration: none;
     color: black;
+}
+
+.iconUser{
+    margin: 1rem;
+    font-size: 2rem;
+}
+
+.iconUser:hover{
+    color: rgb(3, 156, 156);
 }

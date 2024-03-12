@@ -1,7 +1,25 @@
-#grilla{
-    display: grid;
-    grid-template-areas:
-    "main main aside"
-    "main2 main2 main2"
-    "publicidad publicidad publicidad";
+#bodyHome{
+    background-color: aqua;
+}
+
+.contenedorSectionHome{
+    background-color: rgb(255, 196, 0);
+    margin: auto;
+    max-width: 50rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    h2{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: bolder;
+    }
+    p{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        padding: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 910px){
+    .contenedorSectionHome{
+        width: 75%;
+    }
 }
