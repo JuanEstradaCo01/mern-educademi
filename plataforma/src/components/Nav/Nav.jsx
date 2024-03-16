@@ -5,12 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../../imgs/logo.png"
 import Button from 'react-bootstrap/Button';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHouse } from "@fortawesome/free-solid-svg-icons"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
 import "./Nav.css"
 import { Link } from "react-router-dom"
 import { userContext } from '../context/context';
+import { FaUserCircle } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
 
 function Header() {
     const { userToken, userId } = useContext(userContext)
@@ -35,7 +34,7 @@ function Header() {
                         <Nav className="me-auto">
                             <Nav.Link>
                                 <Link to={"/"}>
-                                    <FontAwesomeIcon className='homeSvg' icon={faHouse} />
+                                    <IoMdHome className='homeSvg' />
                                 </Link>
                             </Nav.Link>
                             <Nav.Link>
@@ -103,7 +102,7 @@ function Header() {
                         <Nav className="me-auto">
                             <Nav.Link>
                                 <Link to={"/"}>
-                                    <FontAwesomeIcon className='homeSvg' icon={faHouse} />
+                                    <IoMdHome className='homeSvg' />
                                 </Link>
                             </Nav.Link>
                             <Nav.Link>
@@ -136,7 +135,7 @@ function Header() {
                             </NavDropdown>
                         </Nav>
                         <Nav className='contendorSigns'>
-                            <Link to={`/user/${userId}/${userToken}`} ><FontAwesomeIcon className='iconUser' icon={faUser} /></Link>
+                            <Link to={`/user/${userId}/${userToken}`} ><FaUserCircle className='iconUser' /></Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

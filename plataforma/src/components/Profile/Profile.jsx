@@ -3,6 +3,7 @@ import { userContext } from "../context/context"
 import "./Profile.css"
 import React, { useEffect, useState, useContext } from "react"
 import Loader from "../Loader/Loader"
+import Button from 'react-bootstrap/Button';
 
 function Profile() {
 
@@ -43,7 +44,7 @@ function Profile() {
             <p><strong>Apellidos:</strong> {user.lastNames} </p>
             <p><strong>Edad: </strong> {user.age}</p>
             <p><strong>Email: </strong> {user.email}</p>
-            <Link to={"/ingresar"}><button onClick={borrarTokenID}>Cerrar sesión</button></Link>
+            <Link to={"/ingresar"}><Button onClick={borrarTokenID} variant="outline-danger">Cerrar sesión</Button>{' '}</Link>          
         </>
     )
 }

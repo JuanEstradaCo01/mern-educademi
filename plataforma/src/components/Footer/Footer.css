@@ -2,11 +2,26 @@ footer{
     background-color: white;
     bottom: 0;
     position: relative;
-    width: 100%;
 }
 
 .contenedorFooter{
     display: flex;
+}
+
+@media screen and (max-width: 750px) {
+    .contenedorFooter{
+        flex-direction: column;
+        img{
+            margin: 1.5rem auto;
+        }
+    }
+}
+
+.contenedorNosotrosFooter{
+    text-align: center;
+    p{
+        margin: 0;
+    }
 }
 
 .contenedorNosotrosRedesFooter{
@@ -14,4 +29,30 @@ footer{
     display: flex;
     justify-content: space-evenly;
     padding: 1rem;
+    h4{
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.conetendorRedes{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-evenly;
+    .iconFacebook, .iconInstagram, .iconYoutube{
+        font-size: 1.5rem;
+    }
+}
+
+.iconFacebook:hover, .iconInstagram:hover, .iconYoutube:hover{
+    color: rgb(3, 156, 156);
+    cursor: pointer;
+}
+
+.nosotrosFooter{
+    text-decoration-line: underline;
+}
+
+.nosotrosFooter:hover{
+    color: rgb(3, 156, 156);
 }

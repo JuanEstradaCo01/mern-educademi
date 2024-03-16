@@ -1,5 +1,10 @@
 #bodyHome{
     background-color: aqua;
+    padding: 3rem;
+    h2{
+        font-family: cursive;
+        font-weight: bolder;
+    }
 }
 
 .contenedorSectionHome{
@@ -8,18 +13,36 @@
     max-width: 50rem;
     border-radius: 1rem;
     padding: 2rem;
-    h2{
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-weight: bolder;
-    }
     p{
         font-family: Georgia, 'Times New Roman', Times, serif;
         padding: 1.2rem;
     }
 }
 
+.contenedorSectionRequisitos{
+    margin: 2rem auto;
+    background-color: rgb(1, 107, 27);
+    border-radius: 1rem;
+    max-width: 50rem;
+    padding: 2rem;
+    p{
+        padding: 1.2rem;
+    }
+}
+
+.contenedorSectionNovedades{
+    margin: auto;
+    background-color: rgb(2, 72, 202);
+    border-radius: 1rem;
+    max-width: 50rem;
+    padding: 2rem;
+    p{
+        padding: 1.2rem;
+    }
+}
+
 @media screen and (max-width: 910px){
-    .contenedorSectionHome{
+    .contenedorSectionHome, .contenedorSectionRequisitos, .contenedorSectionNovedades{
         width: 75%;
     }
 }
