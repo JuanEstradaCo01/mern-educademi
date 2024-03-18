@@ -1,0 +1,25 @@
+#bodyNosotros{
+    background-color: bisque;
+    padding: 3rem 5rem;
+}
+
+.cardsNosotros{
+    margin: 3rem auto;
+    max-width: 60rem;
+}
+
+.h2Nosotros, .h2Vision{
+    margin: 6rem 2rem 2rem 2rem;
+    font-family: cursive;
+    font-weight: bolder;
+    text-decoration-line: underline;
+}
+
+.h2Mision, .h2Contenido{
+    margin: 6rem 2rem 2rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    font-family: cursive;
+    font-weight: bolder;
+    text-decoration-line: underline;
+}

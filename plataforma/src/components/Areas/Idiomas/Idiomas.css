@@ -1,0 +1,81 @@
+#bodyIdiomas{
+    padding: 3rem;
+    background-color: rgb(49, 143, 143);
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: cursive;
+        color: rgb(0, 255, 76);
+        margin: 4rem auto;
+    }
+}
+
+.contenedorIdiomasIngles{
+    margin: 2rem auto;
+    max-width: 25rem;
+    background-color: rgb(241, 79, 79);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(6, 184, 130);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.contenedorIdiomasFrances{
+    margin: 2rem auto;
+    max-width: 25rem;
+    background-color: rgb(2, 84, 190);
+    color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(6, 184, 130);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.contenedorIdiomasAleman{
+    margin: 2rem auto;
+    max-width: 25rem;
+    background-color: rgb(118, 168, 1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(3, 82, 58);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.imgIdiomas{
+    margin: auto;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.btnInscribirse{
+    display: flex;
+    margin: auto;
+}
+
+@media  screen and (min-width: 991px) {
+    .contenedorIdiomasIngles, .contenedorIdiomasFrances, .contenedorIdiomasAleman{
+        display: flex;
+        max-width: 50rem;
+    }
+    .imgIdiomas{
+        width: 25rem;
+    }
+    .contenedorDescripcionIdioma{
+        width: 40%;
+    }
+}

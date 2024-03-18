@@ -1,5 +1,4 @@
 import "./Footer.css"
-import logo from "../../imgs/logo.png"
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
@@ -11,7 +10,6 @@ function Footer() {
         <>
             <footer>
                 <div className="contenedorFooter">
-                    <img className='imgLogo' src={logo} alt="logo" />
                     <div className="contenedorNosotrosRedesFooter">
                         <div className="contenedorNosotrosFooter">
                             <h4>Nosotros</h4>
