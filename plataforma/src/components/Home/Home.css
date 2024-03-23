@@ -1,5 +1,5 @@
 #bodyHome{
-    background-color: aqua;
+    background: linear-gradient(0deg, rgba(40,91,214,1) 0%, rgba(7,35,71,1) 50%);
     padding: 3rem;
     h2{
         font-family: cursive;
@@ -8,7 +8,8 @@
 }
 
 .contenedorSectionHome{
-    background-color: rgb(255, 196, 0);
+    border: solid grey 2px;
+    color: white;
     margin: auto;
     max-width: 50rem;
     border-radius: 1rem;
@@ -21,7 +22,8 @@
 
 .contenedorSectionRequisitos{
     margin: 2rem auto;
-    background-color: rgb(1, 107, 27);
+    border: solid grey 2px;
+    color: white;
     border-radius: 1rem;
     max-width: 50rem;
     padding: 2rem;
@@ -32,7 +34,8 @@
 
 .contenedorSectionNovedades{
     margin: auto;
-    background-color: rgb(2, 72, 202);
+    border: solid grey 2px;
+    color: white;
     border-radius: 1rem;
     max-width: 50rem;
     padding: 2rem;
@@ -43,6 +46,7 @@
 
 @media screen and (max-width: 910px){
     .contenedorSectionHome, .contenedorSectionRequisitos, .contenedorSectionNovedades{
-        width: 75%;
+        width: 95%;
+        font-size: .9rem;
     }
 }

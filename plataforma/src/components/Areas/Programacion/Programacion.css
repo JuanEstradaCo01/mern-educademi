@@ -1,0 +1,83 @@
+#bodyProgramacion{
+    padding: 3rem;
+    background-color: rgb(46, 46, 46);
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: cursive;
+        color: rgb(0, 224, 67);
+        margin: 4rem auto;
+    }
+}
+
+.contenedorProgramacionFront{
+    margin: 4rem auto;
+    max-width: 25rem;
+    color: white;
+    border: solid white 3px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(9, 224, 9);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.contenedorProgramacionBack{
+    margin: 4rem auto;
+    max-width: 25rem;
+    color: white;
+    border: solid rgb(117, 117, 117) 3px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(9, 224, 9);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.contenedorProgramacionFullStack{
+    margin: 4rem auto;
+    max-width: 25rem;
+    color: white;
+    border: solid white 3px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(9, 224, 9);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.imgProgramacion{
+    margin: auto;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.btnInscribirse{
+    display: flex;
+    margin: auto;
+}
+
+@media  screen and (min-width: 991px) {
+    .contenedorProgramacionFront, .contenedorProgramacionBack, .contenedorProgramacionFullStack{
+        display: flex;
+        max-width: 50rem;
+    }
+    .imgProgramacion{
+        width: 25rem;
+    }
+    .contenedorDescripcionProgramacion{
+        width: 40%;
+    }
+}
