@@ -1,3 +1,7 @@
+.contenedorLoader{
+  height: 100vh;
+}
+
 .dot-spinner {
     --uib-size: 100px;
     --uib-speed: .9s;

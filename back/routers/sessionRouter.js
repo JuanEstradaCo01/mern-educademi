@@ -1,5 +1,4 @@
 const { Router } = require("express")
-const userModel = require("../models/userModel")
 const { createHash, isValidPassword } = require("../utils/hasheo")
 const UserDao = require("../dao/UserManager.js")
 const userDao = new UserDao()
@@ -19,7 +18,7 @@ sessionRouter.post("/register", async (req, res) => {
         const users = await userDao.getUsers()
         const findUser = users.find(item => item.email === email)
         if (findUser) {
-            let body = req.body
+            let body = {}
             body.message = "Email ya registrado"
             body.code = 401
             return res.status(401).json(body)
@@ -27,7 +26,7 @@ sessionRouter.post("/register", async (req, res) => {
 
         //Valido que se llenaron todos los campos:
         if (names === "" || lastNames === "" || age === "" || email === "" || phone === "" || password === "") {
-            let body = req.body
+            let body = {}
             body.message = "Completa todos los campos"
             body.code = 401
             return res.status(401).json(body)
@@ -36,7 +35,7 @@ sessionRouter.post("/register", async (req, res) => {
         //Encripto la contraseña y envio a la base de datos el usuario aprovado:
         const user = req.body
         user.password = createHash(user.password)
-        await userModel.insertMany(user)
+        await userDao.addUser(user)
         user.code = 201
 
         return res.status(201).json(user)

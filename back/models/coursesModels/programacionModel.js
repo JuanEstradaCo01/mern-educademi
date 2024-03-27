@@ -1,18 +1,16 @@
 const mongoose = require("mongoose")
 
-const collection = "Users"
+const collection = "ProgramacionCurso"
 
 const userSchema = mongoose.Schema({
-    names: String,
-    lastNames: String,
-    age: Number,
-    email: {
+    curso: {
         type: String,
         unique: true
     },
-    phone: Number,
-    password: String,
-    courses: Array
+    titulacion: String,
+    duracion: Number,
+    descripcion: String,
+    conocimientosPrevios: String
 })
 
 module.exports = mongoose.model(collection, userSchema)

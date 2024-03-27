@@ -1,49 +1,68 @@
 import "./Idiomas.css"
+import React, { useState, useEffect } from "react";
 import Ingles from "../../../imgs/idiomas-ingles.png"
 import Button from 'react-bootstrap/Button';
 import Frances from "../../../imgs/idiomas-frances.png"
 import Aleman from "../../../imgs/idioma-aleman.png"
+import Loader from "../../Loader/Loader";
 
 function Idiomas() {
+    const [courses, setCourses] = useState("")
+
+    useEffect(() => {
+        fetch(`/idiomas`)
+            .then(res => res.json())
+            .then(data => {
+                setCourses(data)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }, [])
+
+    if (courses === "") {
+        return <Loader />
+    }
+
     return (
         <main id="bodyIdiomas">
             <h1>Idiomas</h1>
 
-            <div className="contenedorIdiomasIngles">
-                <img className="imgIdiomas" src={Ingles} alt="Ingles" />
-                <div className="contenedorDescripcionIdioma">
-                    <h4>Ingles</h4>
-                    <p><strong>Titulación: </strong>B2 (Avanzado)</p>
-                    <p><strong>Duración: </strong> 2 años</p>
-                    <p><strong>Conocimientos previos: </strong>Sin conocimientos previos</p>
-                    <p><strong>Descripción: </strong>Curso de ingles intensivo con duración de 2 años y certificación B2</p>
-                    <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
-                </div>
-            </div>
+            {courses.map(item => {
+                function contenedorStyle(){
+                    if (item.curso === "Ingles") {
+                        return "contenedorIdiomasIngles"
+                    } else if (item.curso === "Frances") {
+                        return "contenedorIdiomasFrances"
+                    } else if (item.curso === "Aleman") {
+                        return "contenedorIdiomasAleman"
+                    }
+                }
+                
+                function img() {
+                    if (item.curso === "Ingles") {
+                        return Ingles
+                    } else if (item.curso === "Frances") {
+                        return Frances
+                    } else if (item.curso === "Aleman") {
+                        return Aleman
+                    }
+                }
 
-            <div className="contenedorIdiomasFrances">
-                <img className="imgIdiomas" src={Frances} alt="Frances" />
-                <div className="contenedorDescripcionIdioma">
-                    <h4>Frances</h4>
-                    <p><strong>Nivel: </strong>Avanzado</p>
-                    <p><strong>Duración: </strong> 2 años</p>
-                    <p><strong>Conocimientos previos: </strong>Sin conocimientos previos</p>
-                    <p><strong>Descripción: </strong>Curso de Frances intensivo con duración de 2 años y certificación con "Nivel avanzado"</p>
-                    <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
-                </div>
-            </div>
-
-            <div className="contenedorIdiomasAleman">
-                <img className="imgIdiomas" src={Aleman} alt="Aleman" />
-                <div className="contenedorDescripcionIdioma">
-                    <h4>Aleman</h4>
-                    <p><strong>Nivel: </strong>Avanzado</p>
-                    <p><strong>Duración: </strong> 2 años</p>
-                    <p><strong>Conocimientos previos: </strong>Sin conocimientos previos</p>
-                    <p><strong>Descripción: </strong>Curso de Aleman intensivo con duración de 2 años y certificación con "Nivel avanzado"</p>
-                    <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
-                </div>
-            </div>
+                return (
+                    <div className={contenedorStyle()}>
+                        <img className="imgIdiomas" src={img()} alt="Ingles" />
+                        <div className="contenedorDescripcionIdioma">
+                            <h4>{item.curso}</h4>
+                            <p><strong>Titulación: </strong>{item.titulacion}</p>
+                            <p><strong>Duración: </strong> {(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
+                            <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
+                            <p><strong>Descripción: </strong>{item.descripcion}</p>
+                            <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+                        </div>
+                    </div>
+                )
+            })}
         </main>
     )
 }

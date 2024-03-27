@@ -5,16 +5,6 @@ const jwt = require("jsonwebtoken")
 
 const userRouter = Router()
 
-userRouter.get("/users", async (req, res) => {
-    try {
-        const users = await userDao.getUsers()
-
-        return res.status(200).json(users)
-    } catch (e) {
-        return res.status(500).json({ Error: "Ocurrio un error al traer los usuarios" })
-    }
-})
-
 userRouter.get("/user/:uid/:token", async (req, res) => {
     const uid = req.params.uid
     const accessToken = req.params.token
