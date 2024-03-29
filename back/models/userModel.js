@@ -12,7 +12,8 @@ const userSchema = mongoose.Schema({
     },
     phone: Number,
     password: String,
-    courses: Array
+    courses: Array,
+    role: String
 })
 
 module.exports = mongoose.model(collection, userSchema)

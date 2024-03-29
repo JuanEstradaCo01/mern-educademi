@@ -10,7 +10,7 @@ function Home() {
 
             <div className="contenedorSectionRequisitos">
                 <h2>Requisitos para aplicar</h2>
-                <p>No se necesita ningun requisito para estudiar en Educademi, solo necesitas las ganas y disposicion de aprender, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam delectus commodi similique debitis beatae adipisci dolorum totam impedit consectetur rem officia reprehenderit nemo, magnam ad? Magnam porro a temporibus officia!LoremloremLorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati assumenda, sed delectus alias odit illum quasi qui, dolore necessitatibus sint molestiae? Nihil, numquam ea quidem quam molestiae dolores labore iste.</p>
+                <p>No se necesita ningun requisito para estudiar en Educademi, solo necesitas las ganas y disposicion de aprender, Educademi ¡Tu mejor elección! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam delectus commodi similique debitis beatae adipisci dolorum totam impedit consectetur rem officia reprehenderit nemo, magnam ad? Magnam porro a temporibus officia!LoremloremLorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati assumenda, sed delectus alias odit illum quasi qui, dolore necessitatibus sint molestiae? Nihil, numquam ea quidem quam molestiae dolores labore iste.</p>
             </div>
 
             <div className="contenedorSectionNovedades">

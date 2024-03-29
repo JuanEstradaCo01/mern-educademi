@@ -1,0 +1,51 @@
+#bodyGastronomia{
+    padding: 3rem;
+    background-color: rgb(216, 216, 194);
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: cursive;
+        color: rgb(0, 224, 67);
+        margin: 4rem auto;
+    }
+}
+
+.contenedorGastronomia{
+    margin: 4rem auto;
+    max-width: 25rem;
+    color: black;
+    background-color: rgb(252, 238, 160);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    h4{
+        text-align: center;
+        color: rgb(9, 224, 9);
+        margin: 2rem;
+        font-weight: bolder;
+        font-family: cursive;
+    }
+}
+
+.imgGastronomia{
+    margin: auto;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.btnInscribirse{
+    display: flex;
+    margin: auto;
+}
+
+@media  screen and (min-width: 991px) {
+    .contenedorGastronomia{
+        display: flex;
+        max-width: 50rem;
+    }
+    .imgGastronomia{
+        width: 25rem;
+    }
+    .contenedorDescripcionGastronomia{
+        width: 40%;
+    }
+}

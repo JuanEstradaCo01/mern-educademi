@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 30rem;
+    max-width: 30rem;
     margin: auto;
     background-color: white;
     border-radius: 1rem;
@@ -43,4 +43,25 @@
 .btnRegistrar{
     margin: 1rem auto 0rem auto;
     width: 40%;
+}
+
+@media screen and (max-width: 500px) {
+    .subContenedorRegistrar{
+        h2{
+            font-size: 1.3rem;
+        }
+        form{
+            label{
+                width: 100%;
+                font-size: .9rem;
+                input{
+                    width: 15rem
+                }
+            }
+        }
+    }
+
+    .btnRegistrar{
+        width: 39%;
+    }
 }
