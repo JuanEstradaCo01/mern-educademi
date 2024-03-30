@@ -35,7 +35,7 @@ function Ingresar() {
             .then(data => {
                 if (data.code === 301) {
                     setData(data)
-                    navigate(`/user/${data.uid}/${data.token}`)
+                    navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
                     MySwal.fire({
                         show: true,

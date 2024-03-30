@@ -9,6 +9,10 @@ class ProgramacionCoursesManager {
         return this.model.find()
     }
 
+    async getCourseById(cid){
+        return this.model.findById(cid)
+    }
+
     async addCourse(course){
         return this.model.insertMany(course)
     }

@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken")
 const sessionRouter = Router()
 
 function generateToken(uidObject) {
-    return jwt.sign(uidObject, process.env.SECRET_KEY, {expiresIn: "1h"})
+    return jwt.sign(uidObject, process.env.SECRET_KEY, { expiresIn: "1h" })
 }
 
 sessionRouter.post("/register", async (req, res) => {
@@ -63,14 +63,14 @@ sessionRouter.post("/login", async (req, res) => {
 
         //Valido si existe el correo en la DB:
         if (!findUser) {
-            body.code = 404
+            body.code = 401
             body.message = "Usuario no registrado"
             return res.status(401).json(body)
         }
 
         //Valido si la contraseña es correcta:
         if (!isValidPassword(body.pass, findUser.password)) {
-            body.code = 404
+            body.code = 401
             body.message = "Contraseña incorrecta"
             return res.status(401).json(body)
         }
@@ -86,8 +86,9 @@ sessionRouter.post("/login", async (req, res) => {
         const accessToken = generateToken(uidObject)
         body.token = accessToken
         body.message = "Usuario autenticado correctamente"
+        console.log("✅ Iniciaste sesion")
 
-        return res.status(301).header("authToken", accessToken).json(body)
+        return res.status(301).cookie("authToken", `${accessToken}`, { signed: true }).json(body)
     } catch (e) {
         return res.status(500).json({
             error: "Ocurrio un error al iniciar sesion", e
@@ -95,19 +96,29 @@ sessionRouter.post("/login", async (req, res) => {
     }
 })
 
-sessionRouter.get("/logout", (req, res) => {
-    req.session.destroy(e => {
-        const logout = {
-            message: "Logout OK"
+sessionRouter.post("/logout", (req, res) => {
+    try {
+        const token = req.signedCookies.authToken
+
+        if(token === undefined){
+            return res.status(404).json({
+                code: 404,
+                message: "Operacion invalida, no existe una sesion activa"
+            })
         }
-        if (!e) {
-            console.log("Sesion cerrada")
-            return res.status(200).json(logout)
-        }
-        else {
-            return res.status(500).json({ error: "Logout Error", e })
-        }
-    })
+
+        console.log("⛔ Sesion cerrada")
+
+        return res.status(200).clearCookie("authToken").json({
+            code: 200,
+            message: "Sesion cerrada"
+        })
+    } catch (e) {
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al cerrar sesion", e
+        })
+    }
 })
 
 module.exports = sessionRouter

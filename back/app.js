@@ -4,6 +4,7 @@ const sessionRouter = require("./routers/sessionRouter")
 const userRouter = require("./routers/userRouter")
 const courseRouter = require("./routers/courseRouter")
 const MongoSingleton = require("./config/singleton") 
+const cookieParser = require("cookie-parser")
 require("dotenv").config()
 
 //Conexion a la base de datos(MongoDB):
@@ -14,6 +15,7 @@ const app = server()
 app.use(cors())
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
+app.use(cookieParser("SecretCookieAuthJWT"))
 
 const PORT = process.env.PORT || 8080
 

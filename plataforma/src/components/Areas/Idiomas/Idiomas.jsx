@@ -1,13 +1,15 @@
 import "./Idiomas.css"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Ingles from "../../../imgs/idiomas-ingles.png"
 import Button from 'react-bootstrap/Button';
 import Frances from "../../../imgs/idiomas-frances.png"
 import Aleman from "../../../imgs/idioma-aleman.png"
 import Loader from "../../Loader/Loader";
+import { userContext } from "../../context/context";
 
 function Idiomas() {
     const [courses, setCourses] = useState("")
+    const { inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/idiomas`)
@@ -29,7 +31,7 @@ function Idiomas() {
             <h1>Idiomas</h1>
 
             {courses.map(item => {
-                function contenedorStyle(){
+                function contenedorStyle() {
                     if (item.curso === "Ingles") {
                         return "contenedorIdiomasIngles"
                     } else if (item.curso === "Frances") {
@@ -38,7 +40,7 @@ function Idiomas() {
                         return "contenedorIdiomasAleman"
                     }
                 }
-                
+
                 function img() {
                     if (item.curso === "Ingles") {
                         return Ingles
@@ -58,7 +60,9 @@ function Idiomas() {
                             <p><strong>Duración: </strong> {(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
-                            <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+
+                            <Button id={item._id} onClick={inscribirse} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+
                         </div>
                     </div>
                 )

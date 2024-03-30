@@ -7,6 +7,8 @@ const ArtesDao = require("../dao/coursesDao/ArtesCoursesManager")
 const artesDao = new ArtesDao()
 const GastronomiaDao = require("../dao/coursesDao/GastronomiaCoursesManager")
 const gastronomiaDao = new GastronomiaDao()
+const UserDao = require("../dao/UserManager")
+const userDao = new UserDao()
 
 const courseRouter = Router()
 
@@ -55,6 +57,53 @@ courseRouter.post("/idiomas/addcurso", async (req, res) => {
         })
     } catch (e) {
         return res.status(500).json({ error: "Ocurrio un error al agregar el curso", e })
+    }
+})
+
+//Inscribirse a un curso de idiomas:
+courseRouter.post("/idiomas/inscribirse/:cid", async (req, res) => {
+    try {
+        const authCookie = req.signedCookies.authToken
+        if(authCookie === undefined){
+            return res.status(404).json({
+                code: 404,
+                message: "Inicia sesion"
+            })
+        }
+
+        //Valido si el usuario existe:
+        const uid = req.body.uid
+        const user = await userDao.getUserById(uid)
+        if(!user){
+            return res.status(404).json({
+                code: 404,
+                message: "El usuario no esta registrado en la base de datos"
+            })
+        }
+
+        //Valido si el curso existe:
+        const cid = req.params.cid
+        const course = await idiomasDao.getCourseById(cid)
+        if(!course){
+            return res.status(404).json({
+                code: 404,
+                message: "El curso no esta en la base de datos"
+            })
+        }
+
+        //Agrego el curso al usuario:
+        user.courses.push(course)
+        await userDao.addUserCourse(uid, user)
+
+        return res.status(200).json({
+            code: 200,
+            message: `Curso agregado`
+        })
+    } catch (e) {
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error para inscribirse al curso", e
+        })
     }
 })
 

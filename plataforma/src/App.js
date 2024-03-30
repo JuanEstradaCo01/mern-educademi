@@ -39,7 +39,7 @@ function App() {
             <Route exact path='/artes' element={<Artes />} />
             <Route exact path='/ingresar' element={<Ingresar />} />
             <Route exact path='/registrar' element={<Registrar />} />
-            <Route exact path="/user/:uid/:token" element={<Profile />} />
+            <Route exact path="/user/:uid" element={<Profile />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />

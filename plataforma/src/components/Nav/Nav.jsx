@@ -12,9 +12,9 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 
 function Header() {
-    const { userToken, userId } = useContext(userContext)
+    const { userId } = useContext(userContext)
 
-    if (userToken === "") {
+    {if (userId === "") {
         return (
             <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
                 <Container>
@@ -55,13 +55,13 @@ function Header() {
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Link to={"/gastronomia"}>
-                                        Gastronomia
+                                    <Link to={"/artes"}>
+                                        Artes
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Link to={"/artes"}>
-                                        Artes
+                                    <Link to={"/gastronomia"}>
+                                        Gastronomia
                                     </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
@@ -123,25 +123,25 @@ function Header() {
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Link to={"/gastronomia"}>
-                                        Gastronomia
+                                    <Link to={"/artes"}>
+                                        Artes
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
-                                    <Link to={"/artes"}>
-                                        Artes
+                                    <Link to={"/gastronomia"}>
+                                        Gastronomia
                                     </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav className='contendorSigns'>
-                            <Link to={`/user/${userId}/${userToken}`} ><FaUserCircle className='iconUser' /></Link>
+                            <Link to={`/user/${userId}`} ><FaUserCircle className='iconUser' /></Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
         );
     }
-}
+}}
 
 export default Header;

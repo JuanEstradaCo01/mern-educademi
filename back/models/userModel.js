@@ -13,7 +13,10 @@ const userSchema = mongoose.Schema({
     phone: Number,
     password: String,
     courses: Array,
-    role: String
+    role: {
+        type: String,
+        default: "Usuario"
+    }
 })
 
 module.exports = mongoose.model(collection, userSchema)
