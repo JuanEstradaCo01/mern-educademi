@@ -6,7 +6,7 @@
     text-align: center;
     height: 100%;
     margin: auto;
-    background-color: rgb(88, 85, 85);
+    background-color: rgb(182, 182, 182);
     form {
         display: flex;
         flex-direction: column;
@@ -32,12 +32,16 @@
 }
 
 .contenedorIngresar{
-    height: 25rem;
+    height: 27rem;
     border-radius: 1rem;
     background-color: rgb(37, 37, 37);
     color: white;
     width: 20rem;
     margin: auto;
+    p{
+        color: rgb(27, 117, 252);
+        text-decoration: underline;
+    }
 }
 
 .main{

@@ -1,0 +1,62 @@
+#bodyProfile{
+    height: auto;
+    background-color: rgb(39, 39, 39);
+    padding: 2rem;
+    color: white;
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        margin: 1rem;
+        color: rgb(2, 161, 63);
+    }
+    h3{
+        margin-top: 2rem;
+    }
+}
+
+.contenedorInfoPersonalPerfil{
+    padding: 2rem;
+    .btnLogout{
+        margin-top: 2rem;
+    }
+}
+
+.contenedorCursosInscritosPerfil{
+    border: 2px solid rgb(70, 69, 69);
+    height: auto;
+    max-width: 50rem;
+    margin: 3rem auto;
+    h2{
+        text-align: center;
+        font-weight: bolder;
+        color: green;
+        margin: 1.5rem;
+    }
+    h5{
+       text-align: center;
+    }
+}
+
+.contenedorCursosInscritosDetalles{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 1.5rem auto;
+    button{
+        margin: .5rem;
+        width: 7rem;
+        font-size: .8rem;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .contenedorCursosInscritosDetalles{
+        flex-direction: row;
+        button{
+            margin: .5rem;
+        }
+    }
+}

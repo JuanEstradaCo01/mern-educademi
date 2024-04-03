@@ -8,12 +8,18 @@ footer{
     display: flex;
 }
 
-@media screen and (max-width: 750px) {
-    .contenedorFooter{
-        flex-direction: column;
-        img{
-            margin: 1.5rem auto;
+@media screen and (max-width: 440px) {
+    .contenedorNosotrosRedesFooter{
+        flex-direction: column-reverse;
+        h4{
+            text-align: center;
         }
+    }
+    .contenedorNosotrosFooter{
+        margin-top: 3rem;
+    }
+    .contenedorNosotrosRedesFooter{
+        margin-top: 1rem;
     }
 }
 

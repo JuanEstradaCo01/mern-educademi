@@ -67,6 +67,8 @@ function Ingresar() {
 
                         <Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar">Ingresar</Button>
                     </form>
+
+                    <a href="/recuperarcontraseña"><p>¿Olvidaste tu contraseña?</p></a>
                 </div>
             </div>
         </div>

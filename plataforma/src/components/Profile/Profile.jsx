@@ -34,7 +34,7 @@ function Profile() {
                         showConfirmButton: true
                     })
                     navigate("/ingresar")
-                } else if(data.code === 200){
+                } else if (data.code === 200) {
                     setUser(data)
                 }
             })
@@ -59,22 +59,40 @@ function Profile() {
     const userCourses = user.courses
 
     return (
-        <>
+        <main id="bodyProfile">
             <h1>User Profile</h1>
+            <hr />
             <h3>¡Hola, {user.names}!</h3>
-            <p><strong>Nombre:</strong> {user.names}</p>
-            <p><strong>Apellidos:</strong> {user.lastNames} </p>
-            <p><strong>Edad: </strong> {user.age}</p>
-            <p><strong>Email: </strong> {user.email}</p>
-            <p><strong>Rol: </strong> {user.role}</p>
-            <Link to={"/ingresar"}><Button onClick={cerrarSesion} variant="outline-danger">Cerrar sesión</Button>{' '}</Link>
-            {(userCourses.length !== 0) ? userCourses.map((item => {
-                return(
-                    <h5>{item.curso}</h5>
-                )
-            })) :
-            <h5>No te has inscrito a ningun curso</h5>}
-        </>
+            <div className="contenedorInfoPersonalPerfil">
+                <p><strong>Nombre:</strong> {user.names}</p>
+                <p><strong>Apellidos:</strong> {user.lastNames} </p>
+                <p><strong>Edad: </strong> {user.age} años</p>
+                <p><strong>Email: </strong> {user.email}</p>
+                <Link to={"/ingresar"}><Button className="btnLogout" onClick={cerrarSesion} variant="outline-danger">Cerrar sesión</Button>{' '}</Link>
+            </div>
+            <div className="contenedorCursosInscritosPerfil">
+                <h2>Tus cursos:</h2>
+                {(userCourses.length !== 0) ? userCourses.map((item => {
+                    return (
+                        <div className="contenedorCursosInscritosDetalles">
+                            <thead>
+                                <tr>
+                                    <th>{item.curso}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><Button variant="success">Ir al curso</Button>{' '}</td>
+                                    <td><Button variant="danger">Eliminar</Button>{' '}</td>
+                                </tr>
+                    
+                            </tbody>
+                        </div>
+                    )
+                })) :
+                    <h5>No te has inscrito a ningun curso.</h5>}
+            </div>
+        </main>
     )
 }
 
