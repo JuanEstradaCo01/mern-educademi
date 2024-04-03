@@ -6,6 +6,7 @@ import Frances from "../../../imgs/idiomas-frances.png"
 import Aleman from "../../../imgs/idioma-aleman.png"
 import Loader from "../../Loader/Loader";
 import { userContext } from "../../context/context";
+import { ToastContainer } from "react-toastify";
 
 function Idiomas() {
     const [courses, setCourses] = useState("")
@@ -61,12 +62,12 @@ function Idiomas() {
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
 
-                            <Button id={item._id} onClick={inscribirse} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
-
+                            <Button onClick={() => { inscribirse(item.area, item._id) }}  className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
                         </div>
                     </div>
                 )
             })}
+            <ToastContainer />
         </main>
     )
 }

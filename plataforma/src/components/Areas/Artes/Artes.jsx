@@ -1,13 +1,16 @@
 import "./Artes.css"
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from 'react-bootstrap/Button';
 import Loader from "../../Loader/Loader"
 import Fotografia from "../../../imgs/artes-fotografia.jpg"
 import Musica from "../../../imgs/artes-musica.jpg"
 import Dibujo from "../../../imgs/artes-dibujo.jpg"
+import { userContext } from "../../context/context";
+import { ToastContainer } from "react-toastify";
 
-function Artes () {
+function Artes() {
     const [courses, setCourses] = useState("")
+    const { inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/artes`)
@@ -29,7 +32,7 @@ function Artes () {
             <h1>Artes</h1>
 
             {courses.map((item => {
-                function contenedorStyle(){
+                function contenedorStyle() {
                     if (item.curso === "Fotografía") {
                         return "contenedorArtesFotografia"
                     } else if (item.curso === "Música") {
@@ -59,12 +62,13 @@ function Artes () {
                             <p><strong>Duración: </strong>{(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
-                            <Button className="btnInscribirse" variant="outline-secondary">Inscribirse</Button>{' '}
+                            <Button onClick={() => { inscribirse(item.area, item._id) }} className="btnInscribirse" variant="outline-secondary">Inscribirse</Button>{' '}
                         </div>
                     </div>
                 )
             }))
             }
+            <ToastContainer />
         </main>
     )
 }

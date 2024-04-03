@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Loader from "../../Loader/Loader"
 import "./Gastronomia.css"
 import GastronomiaImg from "../../../imgs/gastronomia.jpg"
 import Button from 'react-bootstrap/Button';
+import { userContext } from "../../context/context";
+import { ToastContainer } from "react-toastify";
 
 function Gastronomia() {
     const [courses, setCourses] = useState("")
+    const { inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/gastronomia`)
@@ -49,12 +52,13 @@ function Gastronomia() {
                             <p><strong>Duración: </strong>{(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
-                            <Button className="btnInscribirse" variant="outline-secondary">Inscribirse</Button>{' '}
+                            <Button onClick={() => { inscribirse(item.area, item._id) }}  className="btnInscribirse" variant="outline-secondary">Inscribirse</Button>{' '}
                         </div>
                     </div>
                 )
             }))
             }
+            <ToastContainer />
         </main>
     )
 }

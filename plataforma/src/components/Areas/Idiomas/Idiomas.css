@@ -79,3 +79,16 @@
         width: 40%;
     }
 }
+
+#btnRedirectIngresarSinAuth{
+    width: 6rem;
+    height: 2.5rem;
+    background-color: rgb(4, 163, 163);
+    border-radius: .5rem;
+    border-color: transparent;
+}
+
+#btnRedirectIngresarSinAuth:hover{
+    background-color: rgb(3, 102, 102);
+    color: white;
+}

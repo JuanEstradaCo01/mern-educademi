@@ -60,49 +60,147 @@ courseRouter.post("/idiomas/addcurso", async (req, res) => {
     }
 })
 
-//Inscribirse a un curso de idiomas:
-courseRouter.post("/idiomas/inscribirse/:cid", async (req, res) => {
+//Inscribirse a un curso:
+courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
     try {
         const authCookie = req.signedCookies.authToken
         if(authCookie === undefined){
             return res.status(404).json({
                 code: 404,
-                message: "Inicia sesion"
+                message: "¡Inicia sesion!"
             })
         }
 
         //Valido si el usuario existe:
         const uid = req.body.uid
         const user = await userDao.getUserById(uid)
-        if(!user){
+        if (!user) {
             return res.status(404).json({
                 code: 404,
                 message: "El usuario no esta registrado en la base de datos"
             })
         }
 
-        //Valido si el curso existe:
-        const cid = req.params.cid
-        const course = await idiomasDao.getCourseById(cid)
-        if(!course){
-            return res.status(404).json({
-                code: 404,
-                message: "El curso no esta en la base de datos"
-            })
+        //Verifico el area al que pertenece el curso, valido si el curso existe usando su respectivo Dao y agrego el curso:
+        const area = req.params.area
+        if (area === "idiomas" || "programacion" || "artes" || "gastronomia") {
+
+            const cid = req.params.cid
+            if (area === "idiomas") {
+                const course = await idiomasDao.getCourseById(cid)
+
+                if (!course) {
+                    return res.status(404).json({
+                        code: 404,
+                        message: "El curso no corresponde al area especificada"
+                    })
+                }
+
+                //Agrego el curso al usuario:
+                const verificar = user.courses.find(item => item.curso === course.curso)
+                if(verificar){
+                    return res.status(401).json({
+                        code: 401,
+                        message: "Ya estas inscrito a este curso"
+                    })
+                }
+                user.courses.push(course)
+                await userDao.addUserCourse(uid, user)
+
+                return res.status(200).json({
+                    code: 200,
+                    message: `Curso de ${course.curso} agregado`
+                })
+
+            } else if (area === "programacion") {
+                const course = await programacionDao.getCourseById(cid)
+
+                if (!course) {
+                    return res.status(404).json({
+                        code: 404,
+                        message: "El curso no corresponde al area especificada"
+                    })
+                }
+
+                //Agrego el curso al usuario:
+                const verificar = user.courses.find(item => item.curso === course.curso)
+                if(verificar){
+                    return res.status(401).json({
+                        code: 401,
+                        message: "Ya estas inscrito a este curso"
+                    })
+                }
+                user.courses.push(course)
+                await userDao.addUserCourse(uid, user)
+
+                return res.status(200).json({
+                    code: 200,
+                    message: `Curso de ${course.curso} agregado`
+                })
+
+            } else if (area === "gastronomia") {
+                const course = await gastronomiaDao.getCourseById(cid)
+
+                if (!course) {
+                    return res.status(404).json({
+                        code: 404,
+                        message: "El curso no corresponde al area especificada"
+                    })
+                }
+
+                //Agrego el curso al usuario:
+                const verificar = user.courses.find(item => item.curso === course.curso)
+                if(verificar){
+                    return res.status(401).json({
+                        code: 401,
+                        message: "Ya estas inscrito a este curso"
+                    })
+                }
+                user.courses.push(course)
+                await userDao.addUserCourse(uid, user)
+
+                return res.status(200).json({
+                    code: 200,
+                    message: `Curso de ${course.curso} agregado`
+                })
+
+            } else if (area === "artes") {
+                const course = await artesDao.getCourseById(cid)
+
+                if (!course) {
+                    return res.status(404).json({
+                        code: 404,
+                        message: "El curso no corresponde al area especificada"
+                    })
+                }
+
+                //Agrego el curso al usuario:
+                const verificar = user.courses.find(item => item.curso === course.curso)
+                if(verificar){
+                    return res.status(401).json({
+                        code: 401,
+                        message: "Ya estas inscrito a este curso"
+                    })
+                }
+                user.courses.push(course)
+                await userDao.addUserCourse(uid, user)
+
+                return res.status(200).json({
+                    code: 200,
+                    message: `Curso de ${course.curso} agregado`
+                })
+            }
         }
 
-        //Agrego el curso al usuario:
-        user.courses.push(course)
-        await userDao.addUserCourse(uid, user)
-
-        return res.status(200).json({
-            code: 200,
-            message: `Curso agregado`
+        return res.status(404).json({
+            code: 404,
+            message: "El area del curso es invalida"
         })
+
     } catch (e) {
         return res.status(500).json({
             code: 500,
-            message: "Ocurrio un error para inscribirse al curso", e
+            message: "Ocurrio un error para inscribirse, intentalo más tarde", e
         })
     }
 })

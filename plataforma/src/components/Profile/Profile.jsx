@@ -56,6 +56,8 @@ function Profile() {
         )
     }
 
+    const userCourses = user.courses
+
     return (
         <>
             <h1>User Profile</h1>
@@ -66,6 +68,12 @@ function Profile() {
             <p><strong>Email: </strong> {user.email}</p>
             <p><strong>Rol: </strong> {user.role}</p>
             <Link to={"/ingresar"}><Button onClick={cerrarSesion} variant="outline-danger">Cerrar sesión</Button>{' '}</Link>
+            {(userCourses.length !== 0) ? userCourses.map((item => {
+                return(
+                    <h5>{item.curso}</h5>
+                )
+            })) :
+            <h5>No te has inscrito a ningun curso</h5>}
         </>
     )
 }

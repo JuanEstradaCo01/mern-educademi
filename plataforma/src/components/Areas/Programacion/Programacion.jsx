@@ -1,14 +1,17 @@
 import "./Programacion.css"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import Front from "../../../imgs/programacion-front.jpg"
 import Back from "../../../imgs/programacion-back.jpg"
 import FS from "../../../imgs/programacion-FS.jpg"
 import Button from 'react-bootstrap/Button';
 import Loader from "../../Loader/Loader"
+import { userContext } from "../../context/context";
+import { ToastContainer } from "react-toastify";
 
 function Programacion() {
 
     const [courses, setCourses] = useState("")
+    const { inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/programacion`)
@@ -60,12 +63,13 @@ function Programacion() {
                             <p><strong>Duración: </strong>{(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
-                            <Button className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+                            <Button onClick={() => { inscribirse(item.area, item._id) }} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
                         </div>
                     </div>
                 )
             }))
             }
+            <ToastContainer />
         </main>
     )
 }
