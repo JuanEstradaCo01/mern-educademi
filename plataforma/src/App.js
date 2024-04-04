@@ -19,6 +19,9 @@ import Ingresar from './components/Ingresar/Ingresar';
 import Profile from './components/Profile/Profile';
 import NotFound from './components/Notfound/NotFound';
 import { Userprovider } from './components/context/context';
+import GestionCursos from './components/AdminProfile/Gestiones/GestionCursos/GestionCursos';
+import GestionUsuarios from './components/AdminProfile/Gestiones/GestionUsuarios/GestionUsuarios';
+import AddCurso from './components/AdminProfile/Gestiones/GestionCursos/AddCurso/AddCurso';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
             <Route exact path='/ingresar' element={<Ingresar />} />
             <Route exact path='/registrar' element={<Registrar />} />
             <Route exact path="/user/:uid" element={<Profile />} />
+            <Route exact path='/gestioncursos' element={<GestionCursos />} />
+            <Route exact path="/:area/addcurso" element={<AddCurso />} />
+            <Route exact path='/gestionusuarios' element={<GestionUsuarios />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />

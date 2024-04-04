@@ -25,10 +25,11 @@ courseRouter.get("/idiomas", async (req, res) => {
     }
 })
 
-//Agregar curso de idiomas:
+//Agregar un curso de idiomas:
 courseRouter.post("/idiomas/addcurso", async (req, res) => {
     try {
-        let { curso, titulacion, duracion, descripcion, conocimientosPrevios } = req.body
+        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
+        console.log({ curso, titulacion, duracion, descripcion, conocimientosPrevios, area })
 
         //Valido si el curso ya existe:
         const idiomasCursos = await idiomasDao.getCourses()
@@ -41,7 +42,7 @@ courseRouter.post("/idiomas/addcurso", async (req, res) => {
         }
 
         //Valido que se llenaron todos los campos:
-        if (curso === undefined || titulacion === undefined || duracion === undefined || descripcion === undefined || conocimientosPrevios === undefined) {
+        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
             let body = {}
             body.message = "Completa todos los campos"
             body.code = 401
@@ -221,7 +222,7 @@ courseRouter.get("/programacion", async (req, res) => {
 //Agregar curso de programacion:
 courseRouter.post("/programacion/addcurso", async (req, res) => {
     try {
-        let { curso, titulacion, duracion, descripcion, conocimientosPrevios } = req.body
+        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
 
         //Valido si el curso ya existe:
         const programacionCursos = await programacionDao.getCourses()
@@ -234,7 +235,7 @@ courseRouter.post("/programacion/addcurso", async (req, res) => {
         }
 
         //Valido que se llenaron todos los campos:
-        if (curso === undefined || titulacion === undefined || duracion === undefined || descripcion === undefined || conocimientosPrevios === undefined) {
+        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
             let body = {}
             body.message = "Completa todos los campos"
             body.code = 401
@@ -269,7 +270,7 @@ courseRouter.get("/artes", async (req, res) => {
 //Agregar curso de artes:
 courseRouter.post("/artes/addcurso", async (req, res) => {
     try {
-        let { curso, titulacion, duracion, descripcion, conocimientosPrevios } = req.body
+        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
 
         //Valido si el curso ya existe:
         const artesCursos = await artesDao.getCourses()
@@ -282,7 +283,7 @@ courseRouter.post("/artes/addcurso", async (req, res) => {
         }
 
         //Valido que se llenaron todos los campos:
-        if (curso === undefined || titulacion === undefined || duracion === undefined || descripcion === undefined || conocimientosPrevios === undefined) {
+        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
             let body = {}
             body.message = "Completa todos los campos"
             body.code = 401
@@ -314,10 +315,10 @@ courseRouter.get("/gastronomia", async (req, res) => {
     }
 })
 
-//Agregar curso de gastornomía:
+//Agregar curso de gastronomía:
 courseRouter.post("/gastronomia/addcurso", async (req, res) => {
     try {
-        let { curso, titulacion, duracion, descripcion, conocimientosPrevios } = req.body
+        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
 
         //Valido si el curso ya existe:
         const gastronmiaCursos = await gastronomiaDao.getCourses()
@@ -330,7 +331,7 @@ courseRouter.post("/gastronomia/addcurso", async (req, res) => {
         }
 
         //Valido que se llenaron todos los campos:
-        if (curso === undefined || titulacion === undefined || duracion === undefined || descripcion === undefined || conocimientosPrevios === undefined) {
+        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
             let body = {}
             body.message = "Completa todos los campos"
             body.code = 401

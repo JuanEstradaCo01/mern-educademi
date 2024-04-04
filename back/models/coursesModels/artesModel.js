@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
     titulacion: String,
     duracion: Number,
     descripcion: String,
-    conocimientosPrevios: String
+    conocimientosPrevios: String,
+    area: String
 })
 
 module.exports = mongoose.model(collection, userSchema)

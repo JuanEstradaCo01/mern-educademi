@@ -1,5 +1,5 @@
 #bodyHome{
-    background: linear-gradient(0deg, rgba(40,91,214,1) 0%, rgba(7,35,71,1) 50%);
+    background-color: rgba(7,35,71,1);
     padding: 3rem;
     h2{
         font-family: cursive;

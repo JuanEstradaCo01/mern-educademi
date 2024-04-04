@@ -11,7 +11,7 @@
         display: flex;
         flex-direction: column;
         padding: 1rem;
-        height: 70%;
+        height: 60%;
         .labelIngresar{
             display: flex;
             flex-direction: column;
@@ -27,12 +27,12 @@
     }
     h2{
         height: 10%;
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
 }
 
 .contenedorIngresar{
-    height: 27rem;
+    height: 28rem;
     border-radius: 1rem;
     background-color: rgb(37, 37, 37);
     color: white;
@@ -41,6 +41,7 @@
     p{
         color: rgb(27, 117, 252);
         text-decoration: underline;
+        margin-top: 1.3rem;
     }
 }
 

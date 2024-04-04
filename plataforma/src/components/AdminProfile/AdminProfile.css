@@ -1,0 +1,60 @@
+#bodyAdminProfile {
+    height: auto;
+    background-color: rgb(39, 39, 39);
+    padding: 2rem;
+    color: white;
+
+    h1 {
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        margin: 1rem;
+        color: rgb(2, 161, 63);
+    }
+}
+
+.contenedorInfoPersonalPerfil {
+    padding: 2rem;
+
+    .btnLogout {
+        margin-top: 2rem;
+    }
+}
+
+.h2Gestiones {
+    text-align: center;
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 1rem;
+    color: rgb(5, 156, 243);
+}
+
+.contenedorGestiones {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.gestionCursos {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid white;
+    padding: 3rem;
+    align-items: center;
+    button {
+        width: 6rem;
+        font-size: .8rem;
+        margin-top: 1rem;
+    }
+}
+
+.gestionUsuarios {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    align-items: center;
+    button {
+        width: 6rem;
+        font-size: .8rem;
+        margin-top: 1rem;
+    }
+}

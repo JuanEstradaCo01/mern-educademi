@@ -7,11 +7,12 @@ import Button from 'react-bootstrap/Button';
 import Loader from "../../Loader/Loader"
 import { userContext } from "../../context/context";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom"
 
 function Programacion() {
 
     const [courses, setCourses] = useState("")
-    const { inscribirse } = useContext(userContext)
+    const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/programacion`)
@@ -33,7 +34,7 @@ function Programacion() {
             <h1>Programación</h1>
 
             {courses.map((item => {
-                function contenedorStyle(){
+                function contenedorStyle() {
                     if (item.curso === "frontend") {
                         return "contenedorProgramacionFront"
                     } else if (item.curso === "backend") {
@@ -63,7 +64,15 @@ function Programacion() {
                             <p><strong>Duración: </strong>{(item.duracion > 1) ? <span>{item.duracion} años</span> : <span>{item.duracion} año</span>}</p>
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
-                            <Button onClick={() => { inscribirse(item.area, item._id) }} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+
+                            {(userInContext.role === "Admin") ?
+                                <div>
+                                    <Link to={"/gestioncursos"}><Button className="btnInscribirse" variant="outline-light">Gestionar</Button>{' '}</Link>
+                                </div> :
+                                <div>
+                                    <Button onClick={() => { inscribirse(item.area, item._id) }} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+                                </div>
+                            }
                         </div>
                     </div>
                 )

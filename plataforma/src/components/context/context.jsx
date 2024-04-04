@@ -9,6 +9,7 @@ const Proveedor = userContext.Provider;
 
 function Userprovider(props) {
     const [userId, setUserId] = useState("")
+    const [userInContext, setUserInContext] = useState("")
 
     const MySwal = withReactComponent(Swal)
 
@@ -23,6 +24,10 @@ function Userprovider(props) {
             progress: undefined,
             theme: "dark"
     });
+
+    function agregarUser(data) {
+        setUserInContext(data)
+    }
 
     function agregarId(id) {
         setUserId(id)
@@ -85,6 +90,7 @@ function Userprovider(props) {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 200) {
+                    setUserInContext("")
                     return setUserId("")
                 }
                 MySwal.fire({
@@ -100,7 +106,7 @@ function Userprovider(props) {
     }
 
     return (
-        <Proveedor value={{ userId, agregarId, inscribirse, cerrarSesion }}>
+        <Proveedor value={{ userInContext, userId, agregarUser, agregarId, inscribirse, cerrarSesion }}>
             {props.children}
         </Proveedor>
     )

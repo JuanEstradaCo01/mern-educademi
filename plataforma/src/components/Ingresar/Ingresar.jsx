@@ -1,7 +1,7 @@
 import "./Ingresar.css"
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import withReactComponent from "sweetalert2-react-content"
 
@@ -68,7 +68,8 @@ function Ingresar() {
                         <Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar">Ingresar</Button>
                     </form>
 
-                    <a href="/recuperarcontraseña"><p>¿Olvidaste tu contraseña?</p></a>
+                    <Link to={"/recuperarcontraseña"}><p>¿Olvidaste tu contraseña?</p></Link>
+                    <Link to={"/registrar"}><p>¿No tienes una cuenta?</p></Link>
                 </div>
             </div>
         </div>

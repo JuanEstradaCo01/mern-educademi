@@ -7,10 +7,11 @@ import Aleman from "../../../imgs/idioma-aleman.png"
 import Loader from "../../Loader/Loader";
 import { userContext } from "../../context/context";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Idiomas() {
     const [courses, setCourses] = useState("")
-    const { inscribirse } = useContext(userContext)
+    const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
         fetch(`/idiomas`)
@@ -62,7 +63,14 @@ function Idiomas() {
                             <p><strong>Conocimientos previos: </strong>{item.conocimientosPrevios}</p>
                             <p><strong>Descripción: </strong>{item.descripcion}</p>
 
-                            <Button onClick={() => { inscribirse(item.area, item._id) }}  className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+                            {(userInContext.role === "Admin") ?
+                                <div>
+                                    <Link to={"/gestioncursos"}><Button className="btnInscribirse" variant="outline-light">Gestionar</Button>{' '}</Link>
+                                </div> :
+                                <div>
+                                    <Button onClick={() => { inscribirse(item.area, item._id) }} className="btnInscribirse" variant="outline-light">Inscribirse</Button>{' '}
+                                </div>
+                            }
                         </div>
                     </div>
                 )

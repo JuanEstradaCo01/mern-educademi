@@ -6,16 +6,19 @@ import Loader from "../Loader/Loader"
 import Button from 'react-bootstrap/Button';
 import Swal from "sweetalert2"
 import withReactComponent from "sweetalert2-react-content"
+import AdminProfile from "../AdminProfile/AdminProfile"
 
 function Profile() {
 
-    const { agregarId, cerrarSesion } = useContext(userContext)
+    const { agregarUser, agregarId, cerrarSesion } = useContext(userContext)
 
     const { uid } = useParams()
 
     agregarId(uid)
 
     const [user, setUser] = useState("")
+
+    agregarUser(user)
 
     const navigate = useNavigate()
 
@@ -48,12 +51,7 @@ function Profile() {
     }
 
     if (user.role === "Admin") {
-        return (
-            <>
-                <h1>Admin hello</h1>
-                <Link to={"/ingresar"}><Button onClick={cerrarSesion} variant="outline-danger">Cerrar sesión</Button>{' '}</Link>
-            </>
-        )
+        return (<AdminProfile admin={user} />)
     }
 
     const userCourses = user.courses
