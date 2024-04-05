@@ -20,6 +20,10 @@ class UserManager {
     async addUserCourse(uid, data){
         return this.model.updateOne({ _id: uid }, data)
     }
+
+    async deleteUser(uid, user){
+        return this.model.deleteOne({_id: uid}, user)
+    }
 }
 
 module.exports = UserManager

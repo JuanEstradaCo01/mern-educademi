@@ -1,0 +1,45 @@
+#bodyAddCurso{
+    height: 120vh;
+    padding: 3rem;
+    background-color: black;
+    h2{
+        color: white;
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        margin-bottom: 4rem;
+    }
+}
+
+#formAddCurso{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 50rem;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    label{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 1rem;
+        p{
+            font-size: 1.2rem;
+            color: rgb(1, 216, 216);
+            font-weight: bolder;
+            margin-bottom: .5rem;
+        }
+        input{
+            width: 15rem;
+            padding: .5rem;
+            border-radius: .5rem;
+        }
+        textarea{
+            padding: 1rem;
+            border-radius: .5rem;
+        }
+    }
+}

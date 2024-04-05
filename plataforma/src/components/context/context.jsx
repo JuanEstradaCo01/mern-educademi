@@ -59,7 +59,7 @@ function Userprovider(props) {
                     MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,
-                        icon: "warning",
+                        icon: "info",
                         showConfirmButton: false,
                         footer: '<a href="/ingresar"><button id="btnRedirectIngresarSinAuth">Ir</button></a>'
                     })

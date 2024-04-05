@@ -33,7 +33,7 @@ function AdminProfile(props) {
                     </div>
                     <hr />
                     <div className="gestionUsuarios">
-                    <h4>Usuarios</h4>
+                        <h4>Usuarios</h4>
                         <Link to={"/gestionusuarios"}><Button variant="primary">Gestionar</Button>{' '}</Link>
                     </div>
                 </div>

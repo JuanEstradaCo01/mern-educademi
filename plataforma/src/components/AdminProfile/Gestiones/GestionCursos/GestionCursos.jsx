@@ -10,6 +10,7 @@ function GestionCursos() {
 
     const { userId } = useContext(userContext)
     const MySwal = withReactComponent(Swal)
+
     function authFail() {
         MySwal.fire({
             show: true,
@@ -17,48 +18,52 @@ function GestionCursos() {
             icon: "error",
             showConfirmButton: false,
             allowOutsideClick: false,
-            footer: `<a href="/ingresar"><button class="btnRedirectIngresarSinAuth">Ir</button></a>`
+            footer: `<a href="/ingresar"><button class="btnRedirectIngresarSinAuth">Iniciar sesion</button></a>`
         })
     }
 
-    if (userId !== "") {
+    if (userId === "") {
+        authFail()
         return (
-            <main id="bodyGestionCursos">
-                <h1>Gestion de cursos</h1>
-                <hr />
-                <div className="contenedorAreasGestionCursos">
-                    <h3>Idiomas:</h3>
-                    <div className="contenedorBtnAreasGestionCursos">
-                        <Link to={"/idiomas/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                        <Button variant="dark">Ver cursos</Button>
-                    </div>
-                </div>
-                <div className="contenedorAreasGestionCursos">
-                    <h3>Programación:</h3>
-                    <div className="contenedorBtnAreasGestionCursos">
-                        <Link to={"/programacion/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                        <Button variant="dark">Ver cursos</Button>
-                    </div>
-                </div>
-                <div className="contenedorAreasGestionCursos">
-                    <h3>Artes:</h3>
-                    <div className="contenedorBtnAreasGestionCursos">
-                        <Link to={"/artes/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                        <Button variant="dark">Ver cursos</Button>
-                    </div>
-                </div>
-                <div className="contenedorAreasGestionCursos">
-                    <h3>Gastronomia:</h3>
-                    <div className="contenedorBtnAreasGestionCursos">
-                        <Link to={"/gastronomia/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                        <Button variant="dark">Ver cursos</Button>
-                    </div>
-                </div>
+            <main id="bodyAuthFailGestionCursos">
             </main>
         )
     }
 
-    return authFail()
+    return (
+        <main id="bodyGestionCursos">
+            <h1>Gestion de cursos</h1>
+            <hr />
+            <div className="contenedorAreasGestionCursos">
+                <h3>Idiomas:</h3>
+                <div className="contenedorBtnAreasGestionCursos">
+                    <Link to={"/idiomas/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
+                    <Button variant="dark">Ver cursos</Button>
+                </div>
+            </div>
+            <div className="contenedorAreasGestionCursos">
+                <h3>Programación:</h3>
+                <div className="contenedorBtnAreasGestionCursos">
+                    <Link to={"/programacion/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
+                    <Button variant="dark">Ver cursos</Button>
+                </div>
+            </div>
+            <div className="contenedorAreasGestionCursos">
+                <h3>Artes:</h3>
+                <div className="contenedorBtnAreasGestionCursos">
+                    <Link to={"/artes/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
+                    <Button variant="dark">Ver cursos</Button>
+                </div>
+            </div>
+            <div className="contenedorAreasGestionCursos">
+                <h3>Gastronomia:</h3>
+                <div className="contenedorBtnAreasGestionCursos">
+                    <Link to={"/gastronomia/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
+                    <Button variant="dark">Ver cursos</Button>
+                </div>
+            </div>
+        </main>
+    )
 }
 
 export default GestionCursos;

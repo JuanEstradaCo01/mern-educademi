@@ -46,4 +46,93 @@ userRouter.get("/user/:uid", async (req, res) => {
     })
 })
 
+userRouter.get("/users/:adminId", async (req, res) => {
+    try{
+
+        const adminId = req.params.adminId
+        const validateAdminId = await userDao.getUserById(adminId)
+
+        if(!validateAdminId){
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontro la Auth del admin"
+            })
+        }
+
+        if(validateAdminId.role !== "Admin"){
+            return res.status(401).json({
+                code: 401,
+                message: "No estas autorizado"
+            })
+        }
+    
+        const authCookie = req.signedCookies.authToken
+        if(authCookie === undefined){
+            return res.status(401).json({
+                code: 401,
+                message: "¡Inicia sesion!"
+            })
+        }
+
+        const users = await userDao.getUsers()
+        if(!users){
+            return res.status(401).json({
+                code: 401,
+                message: "Error en la consulta de los usuarios a la DB"
+            })
+        }
+
+        const filter = users.filter(item => item.role === "Usuario")
+
+        return res.status(200).json(filter)
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al consultar los usuarios"
+        })
+    }
+})
+
+userRouter.delete("/delete/:uid/:authAdminIdToDelete", async (req, res) => {
+    try{
+        const adminId = req.params.authAdminIdToDelete
+        const validateAdminId = await userDao.getUserById(adminId)
+
+        if(!validateAdminId){
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontro la Auth del admin"
+            })
+        }
+
+        if(validateAdminId.role !== "Admin"){
+            return res.status(401).json({
+                code: 401,
+                message: "No estas autorizado"
+            })
+        }
+
+        const uid = req.params.uid
+        const user = await userDao.getUserById(uid)
+        if(!user){
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontro el usuario a eliminar"
+            })
+        }
+
+        await userDao.deleteUser(uid, user)
+
+        return res.status(200).json({
+            code: 200,
+            message: `Se eliminó el usuario ${user.names}`
+        })
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al eliminar el usuario"
+        })
+    }
+})
+
 module.exports = userRouter

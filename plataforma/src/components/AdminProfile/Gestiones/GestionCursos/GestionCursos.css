@@ -24,33 +24,36 @@
         font-family: 'Times New Roman', Times, serif;
         color: rgb(27, 136, 27);
     }
-    button{
-        margin-top: 1rem;
-    }
 }
 
 .contenedorBtnAreasGestionCursos{
     display: flex;
     button{
-        margin: 1rem 2rem;
+        margin: 1rem;
     }
 }
 
 @media screen and (max-width: 625px){
     .contenedorBtnAreasGestionCursos{
         flex-direction: column;
+        button{
+            width: 90%;
+        }
     }
 }
 
 .btnRedirectIngresarSinAuth{
-    width: 5rem;
+    width: 8.5rem;
     padding: .5rem 1rem;
-    background-color: rgb(45, 148, 45); 
-    border-color: transparent;
-    border-radius: 1rem;
+    background-color: black; 
+    color: white;
 }
 
 .btnRedirectIngresarSinAuth:hover{
-    background-color: rgb(3, 70, 3);
-    color: white;
+    background-color: white;
+    color: black;
+}
+
+#bodyAuthFailGestionCursos{
+    height: 100vh;
 }

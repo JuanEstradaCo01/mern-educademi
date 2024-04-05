@@ -29,7 +29,6 @@ courseRouter.get("/idiomas", async (req, res) => {
 courseRouter.post("/idiomas/addcurso", async (req, res) => {
     try {
         let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
-        console.log({ curso, titulacion, duracion, descripcion, conocimientosPrevios, area })
 
         //Valido si el curso ya existe:
         const idiomasCursos = await idiomasDao.getCourses()
@@ -54,7 +53,8 @@ courseRouter.post("/idiomas/addcurso", async (req, res) => {
         await idiomasDao.addCourse(addCurso)
 
         return res.status(201).json({
-            success: `Curso agregado exitosamente '${curso}'`
+            code: 201,
+            message: `¡Curso agregado exitosamente! '${curso}'`
         })
     } catch (e) {
         return res.status(500).json({ error: "Ocurrio un error al agregar el curso", e })
@@ -66,8 +66,8 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
     try {
         const authCookie = req.signedCookies.authToken
         if(authCookie === undefined){
-            return res.status(404).json({
-                code: 404,
+            return res.status(401).json({
+                code: 401,
                 message: "¡Inicia sesion!"
             })
         }
@@ -247,7 +247,8 @@ courseRouter.post("/programacion/addcurso", async (req, res) => {
         await programacionDao.addCourse(addCurso)
 
         return res.status(201).json({
-            success: `Curso agregado exitosamente '${curso}'`
+            code: 201,
+            message: `¡Curso agregado exitosamente! '${curso}'`
         })
     } catch (e) {
         return res.status(500).json({ error: "Ocurrio un error al agregar el curso", e })
@@ -295,7 +296,8 @@ courseRouter.post("/artes/addcurso", async (req, res) => {
         await artesDao.addCourse(addCurso)
 
         return res.status(201).json({
-            success: `Curso agregado exitosamente '${curso}'`
+            code: 201,
+            message: `¡Curso agregado exitosamente! '${curso}'`
         })
     } catch (e) {
         return res.status(500).json({ error: `Ocurrio un error al agregar el curso`, e })
@@ -343,7 +345,8 @@ courseRouter.post("/gastronomia/addcurso", async (req, res) => {
         await gastronomiaDao.addCourse(addCurso)
 
         return res.status(201).json({
-            success: `Curso agregado exitosamente '${curso}'`
+            code: 201,
+            message: `¡Curso agregado exitosamente! '${curso}'`
         })
     } catch (e) {
         return res.status(500).json({ error: `Ocurrio un error al agregar el curso`, e })
