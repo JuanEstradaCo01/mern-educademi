@@ -40,6 +40,8 @@ function Artes() {
                         return "contenedorArtesMusica"
                     } else if (item.curso === "Dibujo") {
                         return "contenedorArtesDibujo"
+                    }else{
+                        return "contenedorArtesMusica"
                     }
                 }
 
@@ -49,6 +51,8 @@ function Artes() {
                     } else if (item.curso === "Música") {
                         return Musica
                     } else if (item.curso === "Dibujo") {
+                        return Dibujo
+                    }else{
                         return Dibujo
                     }
                 }

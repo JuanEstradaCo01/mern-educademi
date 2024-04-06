@@ -17,6 +17,28 @@ class UserManager {
         return this.model.insertMany(user)
     }
 
+    async updateUser(uid, body){
+        const user = await this.getUserById(uid)
+
+        if(!user){
+            throw new Error("El usuario no existe")
+        }
+
+        const update = {
+            _id: body._id || user._id,
+            names: body.names || user.names,
+            lastNames: body.lastNames || user.lastNames,
+            age: body.age || user.age,
+            email: body.email || user.email,
+            phone: body.phone || user.phone,
+            password: user.password,
+            courses: body.courses || user.courses,
+            role: user.role
+        }
+        
+        return this.model.updateOne({ _id: uid }, update)
+    }
+
     async addUserCourse(uid, data){
         return this.model.updateOne({ _id: uid }, data)
     }

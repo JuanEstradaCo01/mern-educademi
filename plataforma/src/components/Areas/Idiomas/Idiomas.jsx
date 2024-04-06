@@ -40,6 +40,8 @@ function Idiomas() {
                         return "contenedorIdiomasFrances"
                     } else if (item.curso === "Aleman") {
                         return "contenedorIdiomasAleman"
+                    }else{
+                        return "contenedorIdiomasFrances"
                     }
                 }
 
@@ -50,6 +52,8 @@ function Idiomas() {
                         return Frances
                     } else if (item.curso === "Aleman") {
                         return Aleman
+                    }else{
+                        return Ingles
                     }
                 }
 

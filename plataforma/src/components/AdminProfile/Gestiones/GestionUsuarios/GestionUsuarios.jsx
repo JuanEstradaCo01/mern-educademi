@@ -86,6 +86,14 @@ function GestionUsuarios() {
         return <Loader />
     }
 
+    if (users.length === 0) {
+        return (
+            <main id="bodyGestionUsuarios">
+                <h1>No hay usuarios registrados</h1>
+            </main>
+        )
+    }
+
     return (
         <main id="bodyGestionUsuarios">
             <h1>Gestion de usuarios</h1>
@@ -96,7 +104,7 @@ function GestionUsuarios() {
                         <h5><strong>Nombre: </strong>{item.names}</h5>
                         <h5><strong>Email: </strong>{item.email}</h5>
                         <div className="contenedorBtnAreasGestionUsuarios">
-                            <Link to={`/edituser/${item._id}`}><Button variant="success">Editar usuario</Button>{' '}</Link>
+                            <Link to={`/edituser/${item._id}/${userId}`}><Button variant="success">Editar usuario</Button>{' '}</Link>
                             <Button onClick={() => { deleteUser(item._id) }} variant="danger">Eliminar cuenta</Button>
                         </div>
                     </div>

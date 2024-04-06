@@ -13,8 +13,8 @@ function Userprovider(props) {
 
     const MySwal = withReactComponent(Swal)
 
-    const notify = () =>
-        toast.success('¡Curso agregado!', {
+    const notify = (message) =>
+        toast.success(`¡${message}!`, {
             position: "bottom-right",
             autoClose: 3500,
             hideProgressBar: false,
@@ -46,22 +46,13 @@ function Userprovider(props) {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 200) {
-                    notify()
-                } else if (data.code === 404) {
+                    notify(data.message)
+                }  else if (data.code === 401 || 404) {
                     MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,
                         icon: "info",
-                        showConfirmButton: false,
-                        footer: '<a href="/ingresar"><button id="btnRedirectIngresarSinAuth">Ir</button></a>'
-                    })
-                } else if (data.code === 401) {
-                    MySwal.fire({
-                        show: true,
-                        title: `<strong>${data.message}</strong>`,
-                        icon: "info",
-                        showConfirmButton: false,
-                        footer: '<a href="/ingresar"><button id="btnRedirectIngresarSinAuth">Ir</button></a>'
+                        showConfirmButton: true
                     })
                 } else if (data.code === 500) {
                     MySwal.fire({

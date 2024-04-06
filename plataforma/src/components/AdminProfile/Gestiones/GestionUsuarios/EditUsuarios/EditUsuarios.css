@@ -1,0 +1,71 @@
+#bodyEditUser{
+    background-color: rgb(68, 68, 68);
+    min-height: 100vh;
+    padding: 5rem;
+    color: white;
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(4, 156, 73);
+        margin-bottom: 4rem;
+    }
+}
+
+.contenedorUserInfoEditUser{
+    background-color: rgb(100, 100, 100);
+    border-radius: 1rem;
+    max-width: 50rem;
+    margin: auto;
+    padding: 2rem;
+    strong{
+        color: rgb(64, 206, 128);
+    }
+    button{
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 710px){
+    .contenedorUserInfoEditUser{
+        width: 99%;
+    }
+    #bodyEditUser{
+        padding: 5rem 1rem;
+    }
+}
+
+.contenedorCursosUsuarioEdit{
+    max-width: 45rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: solid 2px grey;
+    border-radius: 1rem;
+    h2{
+        text-align: center;
+        color: rgb(4, 156, 73);
+    }
+    h4{
+        text-align: center;
+        margin: 2rem;
+    }
+}
+
+.contenedorCursoEdit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2.5rem auto;
+    strong{
+        color: rgb(64, 206, 128);
+    }
+}
+
+.inputEdit{
+    background-color: rgb(46, 46, 46);
+    padding: 0.1rem .3rem;
+    border-radius: 1rem;
+    border-color: transparent;
+    color: white;
+}

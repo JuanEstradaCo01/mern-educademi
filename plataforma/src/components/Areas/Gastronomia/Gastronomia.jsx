@@ -34,11 +34,15 @@ function Gastronomia() {
                 function contenedorStyle() {
                     if (item.curso === "Gastronomía") {
                         return "contenedorGastronomia"
+                    }else{
+                        return "contenedorGastronomia"
                     }
                 }
 
                 function img() {
                     if (item.curso === "Gastronomía") {
+                        return GastronomiaImg
+                    }else{
                         return GastronomiaImg
                     }
                 }

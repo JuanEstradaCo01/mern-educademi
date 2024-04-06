@@ -54,11 +54,9 @@ function Profile() {
         return (<AdminProfile admin={user} />)
     }
 
-    const userCourses = user.courses
-
     return (
         <main id="bodyProfile">
-            <h1>User Profile</h1>
+            <h1>Perfil del usuario</h1>
             <hr />
             <h3>¡Hola, {user.names}!</h3>
             <div className="contenedorInfoPersonalPerfil">
@@ -70,7 +68,7 @@ function Profile() {
             </div>
             <div className="contenedorCursosInscritosPerfil">
                 <h2>Tus cursos:</h2>
-                {(userCourses.length !== 0) ? userCourses.map((item => {
+                {(user.courses.length !== 0) ? user.courses.map((item => {
                     return (
                         <div className="contenedorCursosInscritosDetalles">
                             <thead>
@@ -88,7 +86,7 @@ function Profile() {
                         </div>
                     )
                 })) :
-                    <h5>No te has inscrito a ningun curso.</h5>}
+                    <h5>¡No te has inscrito a ningun curso!</h5>}
             </div>
         </main>
     )

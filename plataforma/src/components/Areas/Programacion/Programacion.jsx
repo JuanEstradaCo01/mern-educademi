@@ -41,6 +41,8 @@ function Programacion() {
                         return "contenedorProgramacionBack"
                     } else if (item.curso === "full-stack") {
                         return "contenedorProgramacionFullStack"
+                    }else{
+                        return "contenedorProgramacionBack"
                     }
                 }
 
@@ -50,6 +52,8 @@ function Programacion() {
                     } else if (item.curso === "backend") {
                         return Back
                     } else if (item.curso === "full-stack") {
+                        return FS
+                    }else{
                         return FS
                     }
                 }
