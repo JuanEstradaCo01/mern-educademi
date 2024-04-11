@@ -38,28 +38,28 @@ function GestionCursos() {
                 <h3>Idiomas:</h3>
                 <div className="contenedorBtnAreasGestionCursos">
                     <Link to={"/idiomas/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                    <Link to={"/idiomas"}><Button variant="dark">Ver cursos</Button></Link>
+                    <Link to={"/editcursos/idiomas"}><Button variant="dark">Ver cursos</Button></Link>
                 </div>
             </div>
             <div className="contenedorAreasGestionCursos">
                 <h3>Programación:</h3>
                 <div className="contenedorBtnAreasGestionCursos">
                     <Link to={"/programacion/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                    <Link to={"/programacion"}><Button variant="dark">Ver cursos</Button></Link>
+                    <Link to={"/editcursos/programacion"}><Button variant="dark">Ver cursos</Button></Link>
                 </div>
             </div>
             <div className="contenedorAreasGestionCursos">
                 <h3>Artes:</h3>
                 <div className="contenedorBtnAreasGestionCursos">
                     <Link to={"/artes/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                    <Link to={"/artes"}><Button variant="dark">Ver cursos</Button></Link>
+                    <Link to={"/editcursos/artes"}><Button variant="dark">Ver cursos</Button></Link>
                 </div>
             </div>
             <div className="contenedorAreasGestionCursos">
                 <h3>Gastronomia:</h3>
                 <div className="contenedorBtnAreasGestionCursos">
                     <Link to={"/gastronomia/addcurso"}><Button variant="success">Agregar un curso</Button>{' '}</Link>
-                    <Link to={"/gastronomia"}><Button variant="dark">Ver cursos</Button></Link>
+                    <Link to={"/editcursos/gastronomia"}><Button variant="dark">Ver cursos</Button></Link>
                 </div>
             </div>
         </main>

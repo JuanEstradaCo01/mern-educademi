@@ -1,0 +1,14 @@
+#bodyVerCursos{
+    background-color: rgb(68, 68, 68);
+    padding: 5rem;
+    h1{
+        text-align: center;
+        color: green;
+        margin-bottom: 3rem;
+    }
+}
+
+.editCurso{
+    margin: 5rem;
+    text-align: center;
+}
