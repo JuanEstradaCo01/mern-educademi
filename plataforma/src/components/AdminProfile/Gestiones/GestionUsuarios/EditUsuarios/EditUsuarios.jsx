@@ -3,12 +3,39 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Loader from "../../../../Loader/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { FiCheck } from "react-icons/fi";
+import { FiXCircle } from "react-icons/fi";
 
 function EditUsuarios() {
 
     const { uid } = useParams()
     const { adminId } = useParams()
     const [user, setUser] = useState("")
+
+    const [valorEditarNombre, setValorEditarNombre] = useState(user.names)
+    const [editName, setEditName] = useState(false)
+
+    const [valorEditarApellido, setValorEditarApellido] = useState(user.lastNames)
+    const [editApellido, setEditApellido] = useState(false)
+
+    const [valorEditarEdad, setValorEditarEdad] = useState(user.age)
+    const [editEdad, setEditEdad] = useState(false)
+
+    const [valorEditarEmail, setValorEditarEmail] = useState(user.email)
+    const [editEmail, setEditEmail] = useState(false)
+
+    const [valorEditarPhone, setValorEditarPhone] = useState(user.phone)
+    const [editPhone, setEditPhone] = useState(false)
+
+    function resetEstados(){
+        setEditName(false)
+        setEditApellido(false)
+        setEditEdad(false)
+        setEditEmail(false)
+        setEditPhone(false)
+    }
 
     useEffect(() => {
         fetch(`/edituser/${uid}/${adminId}`)
@@ -25,15 +52,128 @@ function EditUsuarios() {
         return <Loader />
     }
 
+    const notify = (message) =>
+        toast.success(`¡${message}!`, {
+            position: "bottom-right",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark"
+        });
+
+    const actualizar = async (evt) => {
+        evt.preventDefault()
+
+        resetEstados()
+
+        const body = {
+            names: valorEditarNombre,
+            lastNames: valorEditarApellido,
+            age: valorEditarEdad,
+            email: valorEditarEmail,
+            phone: valorEditarPhone
+        }
+
+        await fetch(`/edituser/${uid}/${adminId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        })
+            .then(res => res.json())
+            .then(data => {
+                notify(data.message)
+                fetch(`/edituser/${uid}/${adminId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        setUser(data)
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    async function desinscribir(cid) {
+        await fetch(`/desinscribir/${uid}/${cid}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                notify(data.message)
+                fetch(`/edituser/${uid}/${adminId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        setUser(data)
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
     return (
         <main id="bodyEditUser">
             <h1>Editar usuario {user.names}</h1>
             <div className="contenedorUserInfoEditUser">
-                <p><Button variant="dark">🖊</Button><strong>Nombre: </strong>{user.names}</p>
-                <p><Button variant="dark">🖊</Button><strong>Apellidos: </strong>{user.lastNames}</p>
-                <p><Button variant="dark">🖊</Button><strong>Edad: </strong>{user.age}</p>
-                <p><Button variant="dark">🖊</Button><strong>Email: </strong>{user.email}</p>
-                <p><Button variant="dark">🖊</Button><strong>Telefono: </strong>{user.phone}</p>
+                {(editName === false) ? <p><Button onClick={() => { setEditName(true) }} variant="dark">🖊</Button><strong>Nombre: </strong>{user.names}</p> :
+                    <form id="formEditUser">
+                        <label><p><Button onClick={() => { setEditName(true) }} variant="dark">🖊</Button><strong>Nombre: </strong></p></label>
+                        <input className="inputEditar" onChange={(e) => { setValorEditarNombre(e.target.value) }} type="text" placeholder="Ingresa el nuevo nombre" required />
+                        <button className="cancelEditUser" onClick={() => { setEditName(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
+                        <button className="editUserSuccess" type="submit" onClick={actualizar}><FiCheck className="editUserSuccessIcon" /></button>
+                    </form>
+                }
+
+                {(editApellido === false) ? <p><Button onClick={() => { setEditApellido(true) }} variant="dark">🖊</Button><strong>Apellidos: </strong>{user.lastNames}</p> :
+                    <form id="formEditUser">
+                        <label><p><Button onClick={() => { setEditApellido(true) }} variant="dark">🖊</Button><strong>Apellidos: </strong></p></label>
+                        <input className="inputEditar" onChange={(e) => { setValorEditarApellido(e.target.value) }} type="text" placeholder="Ingresa el nuevo Apellido" required />
+                        <button className="cancelEditUser" onClick={() => { setEditApellido(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
+                        <button className="editUserSuccess" type="submit" onClick={actualizar}><FiCheck className="editUserSuccessIcon" /></button>
+                    </form>
+                }
+
+                {(editEdad === false) ? <p><Button onClick={() => { setEditEdad(true) }} variant="dark">🖊</Button>{(user.age === 1) ? <span><strong>Edad: </strong>{user.age} año</span> : <span><strong>Edad: </strong>{user.age} años</span>}</p> :
+                    <form id="formEditUser">
+                        <label><p><Button onClick={() => { setEditEdad(true) }} variant="dark">🖊</Button><strong>Edad: </strong></p></label>
+                        <input className="inputEditar" onChange={(e) => { setValorEditarEdad(e.target.value) }} type="number" placeholder="Ingresa la nueva edad" required />
+                        <button className="cancelEditUser" onClick={() => { setEditEdad(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
+                        <button className="editUserSuccess" type="submit" onClick={actualizar}><FiCheck className="editUserSuccessIcon" /></button>
+                    </form>
+                }
+
+                {(editEmail === false) ? <p><Button onClick={() => { setEditEmail(true) }} variant="dark">🖊</Button><strong>Email: </strong>{user.email}</p> :
+                    <form id="formEditUser">
+                        <label><p><Button onClick={() => { setEditEmail(true) }} variant="dark">🖊</Button><strong>Email: </strong></p></label>
+                        <input className="inputEditar" onChange={(e) => { setValorEditarEmail(e.target.value) }} type="text" placeholder="Ingresa el nuevo Email" required />
+                        <button className="cancelEditUser" onClick={() => { setEditEmail(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
+                        <button className="editUserSuccess" type="submit" onClick={actualizar}><FiCheck className="editUserSuccessIcon" /></button>
+                    </form>
+                }
+
+                {(editPhone === false) ? <p><Button onClick={() => { setEditPhone(true) }} variant="dark">🖊</Button><strong>Telefono: </strong>{user.phone}</p> :
+                    <form id="formEditUser">
+                        <label><p><Button onClick={() => { setEditPhone(true) }} variant="dark">🖊</Button><strong>Telefono: </strong></p></label>
+                        <input className="inputEditar" onChange={(e) => { setValorEditarPhone(e.target.value) }} type="tel" placeholder="Ingresa el nuevo Telefono" required />
+                        <button className="cancelEditUser" onClick={() => { setEditPhone(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
+                        <button className="editUserSuccess" type="submit" onClick={actualizar}><FiCheck className="editUserSuccessIcon" /></button>
+                    </form>
+                }
+
             </div>
 
             <div className="contenedorCursosUsuarioEdit">
@@ -43,12 +183,13 @@ function EditUsuarios() {
                         return (
                             <div className="contenedorCursoEdit">
                                 <h5><strong>Curso: </strong>{curso.curso}</h5>
-                                <Button variant="danger">Desinscribir</Button>
+                                <Button onClick={() => {desinscribir(curso._id)}} variant="danger">Desinscribir</Button>
                             </div>
                         )
                     }))
                 }
             </div>
+            <ToastContainer />
         </main>
     )
 }

@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Swal from "sweetalert2"
 import withReactComponent from "sweetalert2-react-content"
 import AdminProfile from "../AdminProfile/AdminProfile"
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
 
@@ -23,6 +25,18 @@ function Profile() {
     const navigate = useNavigate()
 
     const MySwal = withReactComponent(Swal)
+
+    const notify = (message) =>
+        toast.success(`¡${message}!`, {
+            position: "bottom-right",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark"
+    });
 
     useEffect(() => {
         fetch(`/user/${uid}`)
@@ -45,6 +59,41 @@ function Profile() {
                 console.log(e)
             })
     }, [])
+
+    async function eliminarCurso(cid) {
+        await fetch(`/desinscribir/${uid}/${cid}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                notify(data.message)
+                fetch(`/user/${uid}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.code !== 200) {
+                            agregarId("")
+                            MySwal.fire({
+                                show: true,
+                                title: `<strong>${data.message}</strong>`,
+                                icon: "error",
+                                showConfirmButton: true
+                            })
+                            navigate("/ingresar")
+                        } else if (data.code === 200) {
+                            setUser(data)
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
 
     if (user === "") {
         return <Loader />
@@ -78,16 +127,17 @@ function Profile() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><Button variant="success">Ir al curso</Button>{' '}</td>
-                                    <td><Button variant="danger">Eliminar</Button>{' '}</td>
+                                    <td><Link to={`/${item.curso}`}><Button variant="success">Ir al curso</Button>{' '}</Link></td>
+                                    <td><Button onClick={() => { eliminarCurso(item._id) }} variant="danger">Eliminar</Button>{' '}</td>
                                 </tr>
-                    
+
                             </tbody>
                         </div>
                     )
                 })) :
                     <h5>¡No te has inscrito a ningun curso!</h5>}
             </div>
+            <ToastContainer />
         </main>
     )
 }

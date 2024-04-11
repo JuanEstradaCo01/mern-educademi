@@ -69,3 +69,37 @@
     border-color: transparent;
     color: white;
 }
+
+.cancelEditUser{
+    background-color: transparent;
+    border-color: transparent;
+    margin: .2rem;
+    .cancelEditUserIcon{
+        font-size: 1.5rem;
+        margin: auto;
+        color: rgb(221, 34, 34);
+    }
+    .cancelEditUserIcon:hover{
+        color: rgb(133, 37, 37);
+    }
+}
+
+.editUserSuccess{
+    background-color: transparent;
+    border-color: transparent;
+    .editUserSuccessIcon{
+        font-size: 1.5rem;
+        color: rgb(5, 201, 70);
+    }
+    .editUserSuccessIcon:hover{
+        color: green;
+    }
+}
+
+.inputEditar{
+    padding: .2rem;
+    background-color: rgb(187, 187, 187);
+    border-color: transparent;
+    border-radius: .5rem;
+    margin: 1rem;
+}

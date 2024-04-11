@@ -20,6 +20,9 @@
     .btnLogout{
         margin-top: 2rem;
     }
+    strong{
+        color: rgb(3, 160, 3);
+    }
 }
 
 .contenedorCursosInscritosPerfil{
@@ -53,7 +56,7 @@
     }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 740px) {
     .contenedorCursosInscritosDetalles{
         flex-direction: row;
     }

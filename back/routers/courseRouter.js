@@ -12,55 +12,6 @@ const userDao = new UserDao()
 
 const courseRouter = Router()
 
-//IDIOMAS: 
-courseRouter.get("/idiomas", async (req, res) => {
-    try {
-        const courses = await idiomasDao.getCourses()
-
-        return res.status(200).json(courses)
-    } catch (e) {
-        return res.status(500).json({
-            error: "Ocurrio un error al consultar los cursos de idiomas", e
-        })
-    }
-})
-
-//Agregar un curso de idiomas:
-courseRouter.post("/idiomas/addcurso", async (req, res) => {
-    try {
-        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
-
-        //Valido si el curso ya existe:
-        const idiomasCursos = await idiomasDao.getCourses()
-        const find = idiomasCursos.find(item => item.curso === curso)
-        if (find) {
-            let body = {}
-            body.message = "Curso ya existente"
-            body.code = 401
-            return res.status(401).json(body)
-        }
-
-        //Valido que se llenaron todos los campos:
-        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
-            let body = {}
-            body.message = "Completa todos los campos"
-            body.code = 401
-            return res.status(401).json(body)
-        }
-
-        const addCurso = req.body
-
-        await idiomasDao.addCourse(addCurso)
-
-        return res.status(201).json({
-            code: 201,
-            message: `¡Curso agregado exitosamente! '${curso}'`
-        })
-    } catch (e) {
-        return res.status(500).json({ error: "Ocurrio un error al agregar el curso", e })
-    }
-})
-
 //Inscribirse a un curso:
 courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
     try {
@@ -203,6 +154,94 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
             code: 500,
             message: "Ocurrio un error para inscribirse, intentalo más tarde", e
         })
+    }
+})
+
+//Desinscribir usuario de un curso:
+courseRouter.post("/desinscribir/:uid/:cid", async (req, res) => {
+    try{
+        const uid = req.params.uid
+        let user = await userDao.getUserById(uid)
+        if(!user){
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontro el usuario"
+            })
+        }
+
+        const cid = req.params.cid
+        const indexCurso = user.courses.findIndex(item => item._id == cid)
+        if(indexCurso === -1){
+            return res.status(404).sjon({
+                code: 404,
+                message: "No se encontro el curso"
+            })
+        }
+        
+        user.courses.splice(indexCurso, 1)
+        user = user.toObject()
+        delete user.password
+
+        await userDao.updateUser(uid, user)
+
+        return res.status(200).json({
+            code: 200,
+            message: `Curso eliminado`
+        })
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al desinscribir el curso"
+        })
+    }
+})
+
+//IDIOMAS: 
+courseRouter.get("/idiomas", async (req, res) => {
+    try {
+        const courses = await idiomasDao.getCourses()
+
+        return res.status(200).json(courses)
+    } catch (e) {
+        return res.status(500).json({
+            error: "Ocurrio un error al consultar los cursos de idiomas", e
+        })
+    }
+})
+
+//Agregar un curso de idiomas:
+courseRouter.post("/idiomas/addcurso", async (req, res) => {
+    try {
+        let { curso, titulacion, duracion, descripcion, conocimientosPrevios, area } = req.body
+
+        //Valido si el curso ya existe:
+        const idiomasCursos = await idiomasDao.getCourses()
+        const find = idiomasCursos.find(item => item.curso === curso)
+        if (find) {
+            let body = {}
+            body.message = "Curso ya existente"
+            body.code = 401
+            return res.status(401).json(body)
+        }
+
+        //Valido que se llenaron todos los campos:
+        if (curso === "" || titulacion === "" || duracion === "" || descripcion === "" || conocimientosPrevios === "" || area === "") {
+            let body = {}
+            body.message = "Completa todos los campos"
+            body.code = 401
+            return res.status(401).json(body)
+        }
+
+        const addCurso = req.body
+
+        await idiomasDao.addCourse(addCurso)
+
+        return res.status(201).json({
+            code: 201,
+            message: `¡Curso agregado exitosamente! '${curso}'`
+        })
+    } catch (e) {
+        return res.status(500).json({ error: "Ocurrio un error al agregar el curso", e })
     }
 })
 
