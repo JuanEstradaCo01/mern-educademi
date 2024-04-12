@@ -16,6 +16,10 @@ class GastronomiaCoursesManager {
     async addCourse(course){
         return this.model.insertMany(course)
     }
+
+    async deleteCourse(cid, curso){
+        return this.model.deleteOne({_id: cid}, curso)
+    }
 }
 
 module.exports = GastronomiaCoursesManager

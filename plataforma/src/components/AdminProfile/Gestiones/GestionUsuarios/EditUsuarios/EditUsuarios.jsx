@@ -1,5 +1,5 @@
 import "./EditUsuarios.css"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Loader from "../../../../Loader/Loader";
@@ -7,12 +7,17 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { FiCheck } from "react-icons/fi";
 import { FiXCircle } from "react-icons/fi";
+import Swal from "sweetalert2"
+import withReactComponent from "sweetalert2-react-content"
+import { userContext } from "../../../../context/context";
 
 function EditUsuarios() {
 
     const { uid } = useParams()
     const { adminId } = useParams()
     const [user, setUser] = useState("")
+    const { userId } = useContext(userContext)
+    const MySwal = withReactComponent(Swal)
 
     const [valorEditarNombre, setValorEditarNombre] = useState(user.names)
     const [editName, setEditName] = useState(false)
@@ -37,6 +42,17 @@ function EditUsuarios() {
         setEditPhone(false)
     }
 
+    function authFail() {
+        MySwal.fire({
+            show: true,
+            title: `<strong>Error de autenticacion, ¡Inicia sesion!</strong>`,
+            icon: "error",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            footer: `<a href="/ingresar"><button class="btnRedirectIngresarSinAuth">Iniciar sesion</button></a>`
+        })
+    }
+
     useEffect(() => {
         fetch(`/edituser/${uid}/${adminId}`)
             .then(res => res.json())
@@ -47,6 +63,14 @@ function EditUsuarios() {
                 console.log(e)
             })
     }, [])
+
+    if(userId === "") {
+        authFail()
+        return (
+            <main id="bodyAuthFailGestionCursos">
+            </main>
+        )
+    }
 
     if (user === "") {
         return <Loader />

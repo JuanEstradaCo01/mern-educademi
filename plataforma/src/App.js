@@ -24,6 +24,7 @@ import GestionUsuarios from './components/AdminProfile/Gestiones/GestionUsuarios
 import AddCurso from './components/AdminProfile/Gestiones/GestionCursos/AddCurso/AddCurso';
 import EditUsuarios from './components/AdminProfile/Gestiones/GestionUsuarios/EditUsuarios/EditUsuarios';
 import VerCursosEdit from './components/AdminProfile/Gestiones/GestionCursos/VerCursosEdit/VerCursosEdit';
+import EditarCurso from './components/AdminProfile/Gestiones/GestionCursos/VerCursosEdit/EditarCurso/EditarCurso';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route exact path='/gestionusuarios' element={<GestionUsuarios />} />
             <Route exact path='/edituser/:uid/:adminId' element={<EditUsuarios />} />
             <Route exact path='/editcursos/:areaCurso' element={<VerCursosEdit />} />
+            <Route exact path='/editarcurso/:areaCurso/:cid' element={<EditarCurso />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />

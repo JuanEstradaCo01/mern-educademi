@@ -1,14 +1,34 @@
 #bodyVerCursos{
     background-color: rgb(68, 68, 68);
     padding: 5rem;
+    min-height: 90vh;
     h1{
         text-align: center;
         color: green;
         margin-bottom: 3rem;
+        font-weight: bolder;
     }
 }
 
 .editCurso{
-    margin: 5rem;
+    margin: 1.5rem auto;
     text-align: center;
+    padding: 2rem;
+    border: 2px solid black;
+    border-radius: 2rem;
+    max-width: 40rem;
+    h2{
+        color: white;
+        font-weight: bolder;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    button{
+        margin: .5rem;
+    }
+}
+
+@media screen and (max-width: 660px){
+    .editCurso{
+        margin: 1.5rem auto;
+    }
 }

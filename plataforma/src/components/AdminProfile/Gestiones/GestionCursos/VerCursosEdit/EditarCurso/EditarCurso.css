@@ -1,0 +1,29 @@
+#bodyEditCourseAdmin{
+    min-height: 90vh;
+    background-color: rgb(80, 79, 79);
+    padding: 5rem;
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        color: rgb(2, 141, 2);
+    }
+}
+
+.contenedorEditarCursoAdmin{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 6rem auto;
+    padding: 2rem;
+    border: 2px solid black;
+    border-radius: 1rem;
+    color: white;
+    max-width: 40rem;
+    strong{
+        color: rgb(57, 155, 57);
+        margin-left: .5rem;
+    }
+    p{
+        margin: 1.1rem 0rem;
+    }
+}

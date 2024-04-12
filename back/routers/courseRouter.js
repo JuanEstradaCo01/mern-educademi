@@ -12,6 +12,34 @@ const userDao = new UserDao()
 
 const courseRouter = Router()
 
+const authAdmin = async (req, res, next) => {
+    try {
+        const adminId = req.params.adminId
+        const validateAdminId = await userDao.getUserById(adminId)
+
+        if (!validateAdminId) {
+            return res.status(404).json({
+                code: 404,
+                message: "No se encontro la Auth del admin"
+            })
+        }
+
+        if (validateAdminId.role !== "Admin") {
+            return res.status(401).json({
+                code: 401,
+                message: "No estas autorizado"
+            })
+        }
+    } catch (e) {
+        return res.status(500).json({
+            code: 500,
+            message: "Autenticacion fallida para eliminar el usuario"
+        })
+    }
+
+    return next()
+}
+
 //Inscribirse a un curso:
 courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
     try {
@@ -192,6 +220,151 @@ courseRouter.post("/desinscribir/:uid/:cid", async (req, res) => {
         return res.status(500).json({
             code: 500,
             message: "Ocurrio un error al desinscribir el curso"
+        })
+    }
+})
+
+//Eliminar curso:
+courseRouter.delete("/eliminar/:areaCurso/:cid/:adminId", authAdmin, async (req, res) => {
+    try{
+        const cid = req.params.cid
+        const area = req.params.areaCurso
+
+        if(area === "idiomas"){
+            const course = await idiomasDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            await idiomasDao.deleteCourse(cid, course)
+            
+            return res.status(200).json({
+                code: 200,
+                message: `Se eliminó el curso ${course.curso}`
+            })
+
+        }else if(area === "programacion"){
+            const course = await programacionDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            await programacionDao.deleteCourse(cid, course)
+            
+            return res.status(200).json({
+                code: 200,
+                message: `Se eliminó el curso ${course.curso}`
+            })
+
+        }else if(area === "artes"){
+            const course = await artesDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            await artesDao.deleteCourse(cid, course)
+            
+            return res.status(200).json({
+                code: 200,
+                message: `Se eliminó el curso ${course.curso}`
+            })
+
+        }else if(area === "gastronomia"){
+            const course = await gastronomiaDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            await gastronomiaDao.deleteCourse(cid, course)
+            
+            return res.status(200).json({
+                code: 200,
+                message: `Se eliminó el curso ${course.curso}`
+            })
+
+        }else{
+            return res.status(404).json({
+                code: 404,
+                message: `El area no existe`
+            })
+        }
+
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al eliminar el curso"
+        })
+    }
+})
+
+//Traer curso segun su area:
+courseRouter.get("/:area/:cid/:adminId", authAdmin, async (req, res) => {
+    try{
+        const cid = req.params.cid
+        const area = req.params.area
+        if(area === "idiomas"){
+            const course = await idiomasDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            return res.status(200).json(course)
+        }else if(area === "programacion"){
+            const course = await programacionDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            return res.status(200).json(course)
+        }
+        else if(area === "artes"){
+            const course = await artesDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            return res.status(200).json(course)
+        }else if(area === "gastronomia"){
+            const course = await gastronomiaDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            return res.status(200).json(course)
+        }else{
+            return res.status(404).json({
+                code: 404,
+                message: "El area no existe"
+            })
+        }
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al consultar el curso"
         })
     }
 })
