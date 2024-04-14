@@ -74,26 +74,8 @@ userRouter.get("/user/:uid", async (req, res) => {
     })
 })
 
-userRouter.get("/users/:adminId", async (req, res) => {
+userRouter.get("/users/:adminId", authAdmin, async (req, res) => {
     try {
-
-        const adminId = req.params.adminId
-        const validateAdminId = await userDao.getUserById(adminId)
-
-        if (!validateAdminId) {
-            return res.status(404).json({
-                code: 404,
-                message: "No se encontro la Auth del admin"
-            })
-        }
-
-        if (validateAdminId.role !== "Admin") {
-            return res.status(401).json({
-                code: 401,
-                message: "No estas autorizado"
-            })
-        }
-
         const authCookie = req.signedCookies.authToken
         if (authCookie === undefined) {
             return res.status(401).json({

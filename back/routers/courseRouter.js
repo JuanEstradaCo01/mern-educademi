@@ -33,7 +33,7 @@ const authAdmin = async (req, res, next) => {
     } catch (e) {
         return res.status(500).json({
             code: 500,
-            message: "Autenticacion fallida para eliminar el usuario"
+            message: "Autenticacion fallida"
         })
     }
 
@@ -365,6 +365,94 @@ courseRouter.get("/:area/:cid/:adminId", authAdmin, async (req, res) => {
         return res.status(500).json({
             code: 500,
             message: "Ocurrio un error al consultar el curso"
+        })
+    }
+})
+
+courseRouter.post("/editarcurso/:area/:cid/:adminId", authAdmin, async (req, res) => {
+    try{
+        const area = req.params.area
+        const cid = req.params.cid
+        
+        if(area === "idiomas"){
+            const course = await idiomasDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            const body = req.body
+
+            await idiomasDao.updateCourse(cid, body)
+
+            return res.status(200).json({
+                code: 200,
+                message: `Se acutalizó el curso ${course.curso}`
+            })
+        }else if(area === "programacion"){
+            const course = await programacionDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            const body = req.body
+
+            await programacionDao.updateCourse(cid, body)
+
+            return res.status(200).json({
+                code: 200,
+                message: `Se acutalizó el curso ${course.curso}`
+            })
+        }else if(area === "artes"){
+            const course = await artesDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            const body = req.body
+
+            await artesDao.updateCourse(cid, body)
+
+            return res.status(200).json({
+                code: 200,
+                message: `Se acutalizó el curso ${course.curso}`
+            })
+        }else if(area === "gastronomia"){
+            const course = await gastronomiaDao.getCourseById(cid)
+            if(!course){
+                return res.status(404).json({
+                    code: 404,
+                    message: "No se encontro el curso"
+                })
+            }
+
+            const body = req.body
+
+            await gastronomiaDao.updateCourse(cid, body)
+
+            return res.status(200).json({
+                code: 200,
+                message: `Se acutalizó el curso ${course.curso}`
+            })
+        }else{
+            return res.status(401).json({
+                code: 401,
+                message: "No se ha permitido la actualización"
+            })
+        }
+
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al editar el curso"
         })
     }
 })
