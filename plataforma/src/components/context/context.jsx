@@ -52,7 +52,8 @@ function Userprovider(props) {
                         show: true,
                         title: `<strong>${data.message}</strong>`,
                         icon: "info",
-                        showConfirmButton: true
+                        showConfirmButton: false,
+                        footer: `<a href="/ingresar"><button class="btnRedirectIngresarSinAuth">Iniciar sesion</button></a>`
                     })
                 } else if (data.code === 500) {
                     MySwal.fire({

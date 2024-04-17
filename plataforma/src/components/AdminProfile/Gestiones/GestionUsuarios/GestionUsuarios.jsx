@@ -35,6 +35,23 @@ function GestionUsuarios() {
             })
     }, []);
 
+    async function validarDelete(itemId){
+        return Swal.fire({
+            title: "¿Estas seguro?",
+            text: "Esta accion es irreversible.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#008000",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar",
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteUser(itemId)
+              }
+          });
+    }
+
     async function deleteUser(itemId) {
         await fetch(`/delete/${itemId}/${userId}`, {
             method: "DELETE",
@@ -105,7 +122,7 @@ function GestionUsuarios() {
                         <h5><strong>Email: </strong>{item.email}</h5>
                         <div className="contenedorBtnAreasGestionUsuarios">
                             <Link to={`/edituser/${item._id}/${userId}`}><Button variant="success">Editar usuario</Button>{' '}</Link>
-                            <Button onClick={() => { deleteUser(item._id) }} variant="danger">Eliminar cuenta</Button>
+                            <Button onClick={() => { validarDelete(item._id) }} variant="danger">Eliminar cuenta</Button>
                         </div>
                     </div>
                 )

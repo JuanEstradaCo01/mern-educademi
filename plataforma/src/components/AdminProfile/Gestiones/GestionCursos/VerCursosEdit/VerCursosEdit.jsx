@@ -37,6 +37,23 @@ function VerCursosEdit() {
             })
     }, [])
 
+    async function validarDelete(item){
+        return Swal.fire({
+            title: "¿Estas seguro?",
+            text: "Esta accion es irreversible.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#008000",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar",
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCourse(item)
+              }
+          });
+    }
+
     async function deleteCourse(item) {
         await fetch(`/eliminar/${item.area}/${item._id}/${userId}`, {
             method: "DELETE",
@@ -99,7 +116,7 @@ function VerCursosEdit() {
                             <h2>{item.curso}</h2>
                             <div>
                                 <Link to={`/editarcurso/${item.area}/${item._id}`} ><Button variant="success">Editar</Button>{' '}</Link>
-                                <Button onClick={() => { deleteCourse(item) }} variant="danger">Eliminar</Button>{' '}
+                                <Button onClick={() => { validarDelete(item) }} variant="danger">Eliminar</Button>{' '}
                             </div>
                         </div>
                     )
