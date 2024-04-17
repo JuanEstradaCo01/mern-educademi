@@ -39,6 +39,20 @@ class UserManager {
         return this.model.updateOne({ _id: uid }, update)
     }
 
+    async updateUserPassword(uid, password){
+        const user = await this.getUserById(uid)
+
+        if(!user){
+            throw new Error("El usuario no existe")
+        }
+
+        const update = {
+            password: password,
+        }
+        
+        return this.model.updateOne({ _id: uid }, update)
+    }
+
     async addUserCourse(uid, data){
         return this.model.updateOne({ _id: uid }, data)
     }

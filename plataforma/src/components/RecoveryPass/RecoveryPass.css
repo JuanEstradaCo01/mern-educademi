@@ -1,0 +1,41 @@
+#bodyRecuperarContraseña{
+    height: 100vh;
+    background-color: rgb(15, 50, 61);
+    padding: 5rem;
+    color: white;
+    h1{
+        text-align: center;
+        font-weight: bolder;
+        font-family: 'Times New Roman', Times, serif;
+    }
+}
+
+.contenedroFormRecuperar{
+    margin: 8rem auto;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 1rem;
+    max-width: 20rem;
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        input{
+            padding: .5rem;
+            border-radius: 1rem;
+        }
+        button{
+            margin: 2rem auto;
+            width: 6rem;
+        }
+    }
+    h3{
+        margin-bottom: 3rem;
+        font-weight: bolder;
+        font-family:'Times New Roman', Times, serif ;
+    }
+}

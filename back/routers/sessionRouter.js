@@ -3,6 +3,7 @@ const { createHash, isValidPassword } = require("../utils/hasheo")
 const UserDao = require("../dao/UserManager.js")
 const userDao = new UserDao()
 const jwt = require("jsonwebtoken")
+const nodemailer = require("nodemailer")
 
 const sessionRouter = Router()
 
@@ -35,6 +36,34 @@ sessionRouter.post("/register", async (req, res) => {
         //Encripto la contraseña y envio a la base de datos el usuario aprovado:
         const user = req.body
         user.password = createHash(user.password)
+
+        //Envio correo de bienvenida:
+        const transport = nodemailer.createTransport({
+            host: process.env.PORT, //(para Gmail)
+            service: "gmail", //(para Gmail)
+            port: 587,
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const correo = await transport.sendMail({
+            from: process.env.USER,//Correo del emisor
+            to: `${email}`,//Correo del receptor
+            subject: "Educademi",//Asunto del correo
+            html: `<div>
+            <h1>¡Te damos la bienvenida a Educademi!</h1>
+            <h3>¡Hola, ${names}!</h3>
+            <p>Nos alegra mucho tenerte con nosotros, elegiste bien y estamos seguros que no te arrepentiras, ya te inscribiste a un curso? que esperas...</p>
+            <hr/>
+            <footer><h4>Att: team Educademi</h4></footer>
+        </div>`
+        })
+
         await userDao.addUser(user)
         user.code = 201
 
@@ -100,7 +129,7 @@ sessionRouter.post("/logout", (req, res) => {
     try {
         const token = req.signedCookies.authToken
 
-        if(token === undefined){
+        if (token === undefined) {
             return res.status(404).json({
                 code: 404,
                 message: "Operacion invalida, no existe una sesion activa"
@@ -117,6 +146,139 @@ sessionRouter.post("/logout", (req, res) => {
         return res.status(500).json({
             code: 500,
             message: "Ocurrio un error al cerrar sesion", e
+        })
+    }
+})
+
+sessionRouter.post("/recuperarcontrasena", async (req, res) => {
+    try{
+        const { email } = req.body
+    
+        if(email === "" || undefined){
+            return res.status(401).json({
+                code: 401,
+                message: "¡Completa el campo!"
+            })
+        }
+
+        const users = await userDao.getUsers()
+        const user = users.find(item => item.email === email)
+
+        if(!user){
+            return res.status(404).json({
+                code: 404,
+                message: "¡El correo no esta registrado!"
+            })
+        }
+
+        //Envio correo:
+        const transport = nodemailer.createTransport({
+            host: process.env.PORT, //(para Gmail)
+            service: "gmail", //(para Gmail)
+            port: 587,
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const correo = await transport.sendMail({
+            from: process.env.USER,//Correo del emisor
+            to: `${email}`,//Correo del receptor
+            subject: "Educademi",//Asunto del correo
+            html: `<div>
+            <h1>Recuperar la contraseña de tu cuenta Educademi:</h1>
+            <h3>¡Hola, ${user.names}!</h3>
+            <p>Solicitaste la recuperacion de contraseña de tu cuenta Educademi.</p>
+            <p>Para restablecer tu contraseña da click <a href="http://localhost:3000/recuperandocontrasena/${user._id}">AQUI</a> y sigue con los pasos, gracias por preferirnos.</p>
+            <hr/>
+            <footer><h4>Att: team Educademi</h4></footer>
+        </div>`
+        })
+
+        return res.status(200).json({
+            code: 200,
+            message: "Se envio un correo a la direccion ¡Verifica tu email!"
+        })
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al generar el correo"
+        })
+    }
+})
+
+sessionRouter.post("/resetcontrasena/:uid", async ( req, res) => {
+    try{
+        const uid = req.params.uid
+        const user = await userDao.getUserById(uid)
+
+        if(!user){
+            return res.status(404).json({
+                code: 404,
+                message: "El usuario no fue encontrado"
+            })
+        }
+
+        const { password1, password2 } = req.body
+
+        if(password1 === "" || password2 === ""){
+            return res.status(401).json({
+                code: 401,
+                message: "Completa todos los campos"
+            })
+        }
+    
+        if(password1 !== password2){
+            return res.status(401).json({
+                code: 401,
+                message: "¡Las contraseñas no son iguales!"
+            })
+        }
+
+        const newPassword = createHash(password2)
+
+        //Envio correo:
+        const transport = nodemailer.createTransport({
+            host: process.env.PORT, //(para Gmail)
+            service: "gmail", //(para Gmail)
+            port: 587,
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        })
+
+        const correo = await transport.sendMail({
+            from: process.env.USER,//Correo del emisor
+            to: `${user.email}`,//Correo del receptor
+            subject: "Educademi",//Asunto del correo
+            html: `<div>
+            <h1>Contraseña restablecida:</h1>
+            <h3>¡Hola, ${user.names}!</h3>
+            <p>(Este es un correo informativo).</p>
+            <p>Se restableció exitosamente la contraseña de tu cuenta Educademi, si no fuiste tú ponte en contacto con soporte, en caso contrario hacer caso omiso.</p>
+            <hr/>
+            <footer><h4>Att: team Educademi</h4></footer>
+        </div>`
+        })
+
+        await userDao.updateUserPassword(uid, newPassword)
+
+        return res.status(200).json({
+            code: 200, 
+            message: "¡Se restableció exitosamente la contraseña!"
+        })
+    }catch(e){
+        return res.status(500).json({
+            code: 500,
+            message: "Ocurrio un error al restablecer la contraseña"
         })
     }
 })

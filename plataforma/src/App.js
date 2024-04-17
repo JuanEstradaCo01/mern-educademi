@@ -25,6 +25,8 @@ import AddCurso from './components/AdminProfile/Gestiones/GestionCursos/AddCurso
 import EditUsuarios from './components/AdminProfile/Gestiones/GestionUsuarios/EditUsuarios/EditUsuarios';
 import VerCursosEdit from './components/AdminProfile/Gestiones/GestionCursos/VerCursosEdit/VerCursosEdit';
 import EditarCurso from './components/AdminProfile/Gestiones/GestionCursos/VerCursosEdit/EditarCurso/EditarCurso';
+import RecoveryPass from './components/RecoveryPass/RecoveryPass';
+import RecoveryngPass from './components/RecoveryPass/RecoveryngPass/RecoveryngPass';
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
             <Route exact path='/edituser/:uid/:adminId' element={<EditUsuarios />} />
             <Route exact path='/editcursos/:areaCurso' element={<VerCursosEdit />} />
             <Route exact path='/editarcurso/:areaCurso/:cid' element={<EditarCurso />} />
+            <Route exact path='/recuperarcontraseña' element={<RecoveryPass />} />
+            <Route exact path='/recuperandocontrasena/:uid' element={<RecoveryngPass />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />

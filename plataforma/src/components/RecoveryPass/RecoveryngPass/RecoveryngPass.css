@@ -1,0 +1,54 @@
+#bodyRecoveryngPass{
+    height: 100vh;
+    background-color: rgb(65, 65, 65);
+    padding: 5rem;
+    h1{
+        text-align: center;
+        color: rgb(1, 172, 1);
+        font-weight: bolder;
+        font-family: 'Times New Roman', Times, serif;
+    }
+}
+
+.contenedorContraseñaNueva{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5rem auto;
+    text-align: center;
+    height: 25rem;
+    background-color: black;
+    width: 25rem;
+    border-radius: 1rem;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        input{
+            width: 50%;
+            margin: 1rem;
+            padding: .5rem;
+            border-radius: .5rem;
+        }
+        button{
+            width: 6rem;
+            margin-top: 1rem;
+        }
+        label{
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bolder;
+            margin-top: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #bodyRecoveryngPass{
+        padding: 5rem 1rem;
+    }
+    .contenedorContraseñaNueva{
+        width: 95%;
+    }
+}
