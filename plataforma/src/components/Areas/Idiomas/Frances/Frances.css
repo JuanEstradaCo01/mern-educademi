@@ -1,0 +1,27 @@
+#bodyFrances{
+    padding: 4rem;
+    height: auto;
+    background-color: beige;
+    h1{
+        text-align: center;
+        color: green;
+        font-weight: bolder;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    p{
+        margin: 2rem auto;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        max-width: 40rem;
+    }
+}
+
+@media screen and (max-width: 500px){
+    #bodyFrances{
+        h1{
+            font-size: 1.2rem;
+        }
+        p{
+            font-size: .8rem;
+        }
+    }
+}

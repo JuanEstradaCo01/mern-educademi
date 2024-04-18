@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./FullStack.css"
 
-function Aleman() {
+function FullStack(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyFullStack">
+            <h1>Practicas Full Stack</h1>
 
             <hr />
 
@@ -18,4 +18,4 @@ function Aleman() {
     )
 }
 
-export default Aleman;
+export default FullStack;

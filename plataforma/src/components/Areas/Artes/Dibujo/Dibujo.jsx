@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./Dibujo.css"
 
-function Aleman() {
+function Dibujo(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyDibujo">
+            <h1>Introducción al Dibujo tecnico</h1>
 
             <hr />
 
@@ -18,4 +18,4 @@ function Aleman() {
     )
 }
 
-export default Aleman;
+export default Dibujo;

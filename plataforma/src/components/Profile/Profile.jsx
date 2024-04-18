@@ -60,6 +60,23 @@ function Profile() {
             })
     }, [])
 
+    async function validarDelete(itemId){
+        return Swal.fire({
+            title: "¿Estas seguro?",
+            text: "Esta accion es irreversible.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#008000",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar",
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                eliminarCurso(itemId)
+              }
+          });
+    }
+
     async function eliminarCurso(cid) {
         await fetch(`/desinscribir/${uid}/${cid}`, {
             method: "POST",
@@ -128,7 +145,7 @@ function Profile() {
                             <tbody>
                                 <tr>
                                     <td><Link to={`/${item.curso}`}><Button variant="success">Ir al curso</Button>{' '}</Link></td>
-                                    <td><Button onClick={() => { eliminarCurso(item._id) }} variant="danger">Eliminar</Button>{' '}</td>
+                                    <td><Button onClick={() => { validarDelete(item._id) }} variant="danger">Eliminar</Button>{' '}</td>
                                 </tr>
 
                             </tbody>

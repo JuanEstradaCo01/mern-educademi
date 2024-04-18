@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./GastronomiaCurso.css"
 
-function Aleman() {
+function GastronomiaCurso(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyGastronomiaCurso">
+            <h1>Introducción a la Gastronomía</h1>
 
             <hr />
 
@@ -18,4 +18,4 @@ function Aleman() {
     )
 }
 
-export default Aleman;
+export default GastronomiaCurso;

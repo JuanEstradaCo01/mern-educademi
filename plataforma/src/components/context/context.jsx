@@ -47,16 +47,23 @@ function Userprovider(props) {
             .then(data => {
                 if (data.code === 200) {
                     notify(data.message)
-                }  else if (data.code === 401 || 404) {
-                    MySwal.fire({
+                }else if (data.code === 403) {
+                    return MySwal.fire({
+                        show: true,
+                        title: `<strong>${data.message}</strong>`,
+                        icon: "warning",
+                        showConfirmButton: true
+                    })
+                } else if (data.code === 401 || 404) {
+                    return MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,
                         icon: "info",
                         showConfirmButton: false,
                         footer: `<a href="/ingresar"><button class="btnRedirectIngresarSinAuth">Iniciar sesion</button></a>`
                     })
-                } else if (data.code === 500) {
-                    MySwal.fire({
+                }else if (data.code === 500) {
+                    return MySwal.fire({
                         show: true,
                         title: `<strong>${data.message}</strong>`,
                         icon: "error",

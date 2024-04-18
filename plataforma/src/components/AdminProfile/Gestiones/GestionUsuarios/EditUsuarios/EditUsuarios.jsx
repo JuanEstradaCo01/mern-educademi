@@ -125,6 +125,23 @@ function EditUsuarios() {
             })
     }
 
+    async function validarDesinscribir(Id){
+        return Swal.fire({
+            title: "¿Estas seguro?",
+            text: "Esta accion es irreversible.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#008000",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar",
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                desinscribir(Id)
+              }
+          });
+    }
+
     async function desinscribir(cid) {
         await fetch(`/desinscribir/${uid}/${cid}`, {
             method: "POST",
@@ -207,7 +224,7 @@ function EditUsuarios() {
                         return (
                             <div className="contenedorCursoEdit">
                                 <h5><strong>Curso: </strong>{curso.curso}</h5>
-                                <Button onClick={() => {desinscribir(curso._id)}} variant="danger">Desinscribir</Button>
+                                <Button onClick={() => {validarDesinscribir(curso._id)}} variant="danger">Desinscribir</Button>
                             </div>
                         )
                     }))

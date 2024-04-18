@@ -79,8 +79,8 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
                 //Agrego el curso al usuario:
                 const verificar = user.courses.find(item => item.curso === course.curso)
                 if(verificar){
-                    return res.status(401).json({
-                        code: 401,
+                    return res.status(403).json({
+                        code: 403,
                         message: "Ya estas inscrito a este curso"
                     })
                 }
@@ -105,8 +105,8 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
                 //Agrego el curso al usuario:
                 const verificar = user.courses.find(item => item.curso === course.curso)
                 if(verificar){
-                    return res.status(401).json({
-                        code: 401,
+                    return res.status(403).json({
+                        code: 403,
                         message: "Ya estas inscrito a este curso"
                     })
                 }
@@ -131,8 +131,8 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
                 //Agrego el curso al usuario:
                 const verificar = user.courses.find(item => item.curso === course.curso)
                 if(verificar){
-                    return res.status(401).json({
-                        code: 401,
+                    return res.status(403).json({
+                        code: 403,
                         message: "Ya estas inscrito a este curso"
                     })
                 }
@@ -157,8 +157,8 @@ courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
                 //Agrego el curso al usuario:
                 const verificar = user.courses.find(item => item.curso === course.curso)
                 if(verificar){
-                    return res.status(401).json({
-                        code: 401,
+                    return res.status(403).json({
+                        code: 403,
                         message: "Ya estas inscrito a este curso"
                     })
                 }

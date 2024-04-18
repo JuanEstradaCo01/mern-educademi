@@ -8,7 +8,6 @@ import Home from "./components/Home/Home";
 import Nosotros from "./components/Nosotros/Nosotros";
 import Artes from "./components/Areas/Artes/Artes";
 import Gastronomia from "./components/Areas/Gastronomia/Gastronomia"
-//Componentes de Idiomas
 import Idiomas from './components/Areas/Idiomas/Idiomas';
 import Ingles from './components/Areas/Idiomas/Ingles/Ingles';
 import Frances from './components/Areas/Idiomas/Frances/Frances';
@@ -27,6 +26,13 @@ import VerCursosEdit from './components/AdminProfile/Gestiones/GestionCursos/Ver
 import EditarCurso from './components/AdminProfile/Gestiones/GestionCursos/VerCursosEdit/EditarCurso/EditarCurso';
 import RecoveryPass from './components/RecoveryPass/RecoveryPass';
 import RecoveryngPass from './components/RecoveryPass/RecoveryngPass/RecoveryngPass';
+import Frontend from './components/Areas/Programacion/Front/Frontend';
+import Backend from './components/Areas/Programacion/Back/Backend';
+import FullStack from './components/Areas/Programacion/FullStack/FullStack';
+import Fotografia from './components/Areas/Artes/Fotografia/Fotografia';
+import Musica from './components/Areas/Artes/Musica/Musica';
+import Dibujo from './components/Areas/Artes/Dibujo/Dibujo';
+import GastronomiaCurso from './components/Areas/Gastronomia/GastronomiaCurso/GastronomiaCurso';
 
 function App() {
   return (
@@ -42,9 +48,19 @@ function App() {
             <Route exact path='/ingles' element={<Ingles />} />
             <Route exact path='/frances' element={<Frances />} />
             <Route exact path='/aleman' element={<Aleman />} />
+            {/*Seccion de Programacion*/ }
             <Route exact path='/programacion' element={<Programacion />} />
+            <Route exact path='/frontend' element={<Frontend />} />
+            <Route exact path='/backend' element={<Backend />} />
+            <Route exact path='/full-stack' element={<FullStack />} />
+            {/*Seccion de Gastronomia*/ }
             <Route exact path='/gastronomia' element={<Gastronomia />} />
+            <Route exact path='/Gastronomía' element={<GastronomiaCurso />} />
+            {/*Seccion de Artes*/ }
             <Route exact path='/artes' element={<Artes />} />
+            <Route exact path='/Fotografía' element={<Fotografia />} />
+            <Route exact path='/Música' element={<Musica />} />
+            <Route exact path='/dibujo' element={<Dibujo />} />
             <Route exact path='/ingresar' element={<Ingresar />} />
             <Route exact path='/registrar' element={<Registrar />} />
             <Route exact path="/user/:uid" element={<Profile />} />

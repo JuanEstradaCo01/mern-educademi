@@ -1,4 +1,4 @@
-#bodyAreaIngles{
+#bodyDibujo{
     padding: 4rem;
     height: auto;
     background-color: beige;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 500px){
-    #bodyAreaIngles{
+    #bodyDibujo{
         h1{
             font-size: 1.2rem;
         }

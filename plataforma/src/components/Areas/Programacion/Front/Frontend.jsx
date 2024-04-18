@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./Frontend.css"
 
-function Aleman() {
+function Frontend(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyFrontend">
+            <h1>Introducción al Frontend</h1>
 
             <hr />
 
@@ -14,8 +14,9 @@ function Aleman() {
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, facere veniam! Aspernatur dolor magni, harum eius repellendus perferendis quod in provident iste aliquid veritatis adipisci porro neque dolores sint exercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem maxime nulla distinctio perspiciatis tempora recusandae molestiae, amet incidunt quasi officiis omnis obcaecati corrupti commodi? Illo dolores quaerat quidem vel corrupti. Lorem ipsum dolor sit amet consectetur adipisicing elit. A eius voluptatem explicabo culpa quibusdam id recusandae doloremque odit iusto, ullam vitae veniam accusantium earum necessitatibus qui ipsum facilis? Similique, laborum.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quidem, obcaecati fuga dicta quis quos aspernatur, corporis eligendi, ratione perspiciatis et molestias expedita! Expedita et nemo quibusdam natus ducimus architecto? Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus ut aut eveniet deserunt distinctio magnam, non nesciunt? Similique minus iste impedit voluptatum possimus repellendus repellat vel inventore explicabo? Similique, a.</p>
             <p>...</p>
+            
         </main>
     )
 }
 
-export default Aleman;
+export default Frontend;

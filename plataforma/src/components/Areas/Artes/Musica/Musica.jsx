@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./Musica.css"
 
-function Aleman() {
+function Musica(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyMusica">
+            <h1>Introducción a la Música</h1>
 
             <hr />
 
@@ -18,4 +18,4 @@ function Aleman() {
     )
 }
 
-export default Aleman;
+export default Musica;

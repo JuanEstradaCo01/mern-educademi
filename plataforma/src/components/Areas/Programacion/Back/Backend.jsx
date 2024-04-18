@@ -1,9 +1,9 @@
-import "./Aleman.css"
+import "./Backend.css"
 
-function Aleman() {
+function Backend(){
     return(
-        <main id="bodyAleman">
-            <h1>Introducción al Aleman</h1>
+        <main id="bodyBackend">
+            <h1>Introducción al Backend</h1>
 
             <hr />
 
@@ -18,4 +18,4 @@ function Aleman() {
     )
 }
 
-export default Aleman;
+export default Backend;
