@@ -39,7 +39,7 @@ function Profile() {
     });
 
     useEffect(() => {
-        fetch(`/user/${uid}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
             .then(res => res.json())
             .then(data => {
                 if (data.code !== 200) {
@@ -78,7 +78,7 @@ function Profile() {
     }
 
     async function eliminarCurso(cid) {
-        await fetch(`/desinscribir/${uid}/${cid}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/desinscribir/${uid}/${cid}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function Profile() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`/user/${uid}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.code !== 200) {

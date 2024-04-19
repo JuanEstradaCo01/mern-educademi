@@ -19,7 +19,7 @@ function RecoveryPass() {
 
         document.getElementById("formRecuperar").reset()
 
-        await fetch("/recuperarcontrasena", {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/recuperarcontrasena`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
