@@ -35,7 +35,7 @@ function Ingresar() {
             .then(data => {
                 if (data.code === 301) {
                     setData(data)
-                    navigate(`${process.env.REACT_APP_URL_BACK}/user/${data.uid}`)
+                    navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
                     MySwal.fire({
                         show: true,
