@@ -14,6 +14,7 @@ const app = server()
 
 app.use(cors({
     credentials: true,
+    origin: "https://mern-educademi.vercel.app"
 }))
 app.use((req, res, next) => {
     res.header({"Access-Control-Allow-Origin": "*"});
