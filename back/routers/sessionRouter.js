@@ -117,7 +117,7 @@ sessionRouter.post("/login", async (req, res) => {
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
 
-        return res.status(301).cookie("authToken", `${accessToken}`, { signed: true, secure: true, sameSite: "none" }).json(body)
+        return res.status(301).cookie("authToken", `${accessToken}`, { httpOnly: true, secure: true, sameSite: "none" }).json(body)
     } catch (e) {
         return res.status(500).json({
             error: "Ocurrio un error al iniciar sesion", e
