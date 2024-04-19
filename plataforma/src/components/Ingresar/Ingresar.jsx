@@ -17,7 +17,7 @@ function Ingresar() {
     const ingresar = async (evt) => {
         evt.preventDefault()
 
-        const data = ({
+        const dataUser = ({
             user: user,
             pass: pass
         })
@@ -29,13 +29,13 @@ function Ingresar() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(dataUser),
         })
             .then(res => res.json())
             .then(data => {
                 if (data.code === 301) {
                     setData(data)
-                    navigate(`/user/${data.uid}`)
+                    navigate(`${process.env.REACT_APP_URL_BACK}/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
                     MySwal.fire({
                         show: true,
