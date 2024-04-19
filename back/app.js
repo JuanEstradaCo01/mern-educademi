@@ -16,10 +16,6 @@ app.use(cors({
     credentials: true,
     origin: "https://mern-educademi.vercel.app"
 }))
-app.use((req, res, next) => {
-    res.header({"Access-Control-Allow-Origin": "*"});
-    next();
-}) 
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
 app.use(cookieParser("SecretCookieAuthJWT"))
