@@ -17,19 +17,20 @@ function Ingresar() {
     const ingresar = async (evt) => {
         evt.preventDefault()
 
-        const dataUser = ({
+        const data = ({
             user: user,
             pass: pass
         })
 
         document.getElementById("formIngresar").reset()
 
-        await fetch(`${process.env.REACT_APP_URL_BACK}/login`, {
+        await fetch(`/login`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(dataUser),
+            body: JSON.stringify(data),
         })
             .then(res => res.json())
             .then(data => {

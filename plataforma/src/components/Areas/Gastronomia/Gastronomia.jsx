@@ -12,7 +12,7 @@ function Gastronomia() {
     const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/gastronomia`)
+        fetch(`/gastronomia`)
             .then(res => res.json())
             .then(data => {
                 setCourses(data)

@@ -14,7 +14,7 @@ function Artes() {
     const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/artes`)
+        fetch(`/artes`)
             .then(res => res.json())
             .then(data => {
                 setCourses(data)
