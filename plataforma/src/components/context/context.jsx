@@ -34,7 +34,7 @@ function Userprovider(props) {
     }
 
     async function inscribirse(courseArea, courseId) {
-        await fetch(`${process.env.REACT_APP_URL_BACK}/${courseArea}/inscribirse/${courseId}`, {
+        await fetch(`/${courseArea}/inscribirse/${courseId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

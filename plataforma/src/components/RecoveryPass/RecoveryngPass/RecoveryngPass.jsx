@@ -26,7 +26,7 @@ function RecoveryngPass() {
 
         document.getElementById("formContraseñaNueva").reset()
 
-        await fetch(`${process.env.REACT_APP_URL_BACK}/resetcontrasena/${uid}`, {
+        await fetch(`/resetcontrasena/${uid}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

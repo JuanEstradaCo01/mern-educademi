@@ -41,7 +41,7 @@ function Registrar() {
             password: pass
         })
 
-        await fetch(`${process.env.REACT_APP_URL_BACK}/register`, {
+        await fetch(`/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
