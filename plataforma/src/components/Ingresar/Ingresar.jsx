@@ -29,7 +29,6 @@ function Ingresar() {
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: 'include',
             body: JSON.stringify(dataUser),
         })
             .then(res => res.json())
