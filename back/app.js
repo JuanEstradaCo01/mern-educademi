@@ -12,7 +12,11 @@ MongoSingleton.getConnection()
 
 const app = server()
 
-app.use(cors())
+app.use(cors({
+    origin: "https://mern-educademi.vercel.app", 
+    credentials:  true 
+}))
+app.set("trust proxy",1);
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
 app.use(cookieParser("SecretCookieAuthJWT"))
