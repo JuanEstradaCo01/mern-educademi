@@ -14,7 +14,7 @@ const app = server()
 
 app.use(cors({
     credentials: true,
-    origin: "https://mern-educademi.vercel.app"
+    origin: "https://mern-educademi.onrender.com"
 }))
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
