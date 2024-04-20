@@ -117,6 +117,7 @@ sessionRouter.post("/login", async (req, res) => {
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
 
+        
         return res.status(301).cookie("authToken", `${accessToken}`, { signed:true }).json(body)
     } catch (e) {
         return res.status(500).json({
