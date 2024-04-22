@@ -33,9 +33,9 @@ const authAdmin = async (req, res, next) => {
     return next()
 }
 
-userRouter.get("/user/:uid", async (req, res) => {
+userRouter.get("/user/:uid/:token", async (req, res) => {
     const uid = req.params.uid
-    const accessToken = req.body.authCookie
+    const accessToken = req.params.token
 
     if (accessToken === undefined) {
         return res.status(401).json({
