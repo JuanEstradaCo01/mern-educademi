@@ -15,9 +15,6 @@ function Profile() {
 
     const cookies = new Cookies()
 
-    const authCookie = cookies.get("authToken")
-    console.log({authCookie})
-
     const { agregarUser, agregarId, cerrarSesion } = useContext(userContext)
 
     const { uid } = useParams()
@@ -44,7 +41,7 @@ function Profile() {
             draggable: true,
             progress: undefined,
             theme: "dark"
-    });
+        });
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}/${token}`)
@@ -61,6 +58,8 @@ function Profile() {
                     navigate("/ingresar")
                 } else if (data.code === 200) {
                     setUser(data)
+                    const authCookie = cookies.get("authToken")
+                    console.log({ authCookie })
                 }
             })
             .catch((e) => {
@@ -68,7 +67,7 @@ function Profile() {
             })
     }, [])
 
-    async function validarDelete(itemId){
+    async function validarDelete(itemId) {
         return Swal.fire({
             title: "¿Estas seguro?",
             text: "Esta accion es irreversible.",
@@ -78,11 +77,11 @@ function Profile() {
             cancelButtonColor: "#d33",
             confirmButtonText: "Eliminar",
             allowOutsideClick: false,
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 eliminarCurso(itemId)
-              }
-          });
+            }
+        });
     }
 
     async function eliminarCurso(cid) {
