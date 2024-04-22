@@ -15,7 +15,7 @@ function Programacion() {
     const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/programacion`)
+        fetch(`/programacion`)
             .then(res => res.json())
             .then(data => {
                 setCourses(data)
