@@ -27,8 +27,8 @@ function Profile() {
 
     const MySwal = withReactComponent(Swal)
 
-    const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
-    console.log({cookies})
+    const [cookie, setCookie, removeCookie] = useCookies(['authToken']);
+    console.log({cookie})
 
     const notify = (message) =>
         toast.success(`¡${message}!`, {
@@ -57,6 +57,7 @@ function Profile() {
                     navigate("/ingresar")
                 } else if (data.code === 200) {
                     setUser(data)
+                    setCookie("authToken", data.token)
                 }
             })
             .catch((e) => {
