@@ -9,8 +9,14 @@ import withReactComponent from "sweetalert2-react-content"
 import AdminProfile from "../AdminProfile/AdminProfile"
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from "universal-cookie"
 
 function Profile() {
+
+    const cookies = new Cookies()
+
+    const authCookie = cookies.get("authToken")
+    console.log({authCookie})
 
     const { agregarUser, agregarId, cerrarSesion } = useContext(userContext)
 
