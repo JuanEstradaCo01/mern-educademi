@@ -14,7 +14,7 @@ function Idiomas() {
     const { userInContext, inscribirse } = useContext(userContext)
 
     useEffect(() => {
-        fetch(`/idiomas`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/idiomas`)
             .then(res => res.json())
             .then(data => {
                 setCourses(data)
