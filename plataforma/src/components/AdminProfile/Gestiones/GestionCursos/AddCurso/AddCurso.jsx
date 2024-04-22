@@ -53,7 +53,7 @@ function AddCurso() {
             area: area
         })
 
-        await fetch(`/${area}/addcurso`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/${area}/addcurso`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

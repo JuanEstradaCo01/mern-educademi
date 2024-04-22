@@ -27,7 +27,7 @@ function VerCursosEdit() {
     }
 
     useEffect(() => {
-        fetch(`/${areaCurso}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}`)
             .then(res => res.json())
             .then(data => {
                 setCursos(data)

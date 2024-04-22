@@ -25,7 +25,7 @@ function GestionUsuarios() {
     }
 
     useEffect(() => {
-        fetch(`/users/${userId}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`)
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
@@ -53,7 +53,7 @@ function GestionUsuarios() {
     }
 
     async function deleteUser(itemId) {
-        await fetch(`/delete/${itemId}/${userId}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/delete/${itemId}/${userId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -62,7 +62,7 @@ function GestionUsuarios() {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 200) {
-                    fetch(`/users/${userId}`)
+                    fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`)
                         .then(res => res.json())
                         .then(data => {
                             setUsers(data)
