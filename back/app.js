@@ -13,7 +13,7 @@ MongoSingleton.getConnection()
 const app = server()
 
 app.use(cors({
-    origin: "https://mern-educademi.vercel.app/",
+    origin: "https://mern-educademi.onrender.com",
     credentials:  true 
 }))
 app.use(server.json())
