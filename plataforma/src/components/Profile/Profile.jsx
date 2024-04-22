@@ -9,6 +9,7 @@ import withReactComponent from "sweetalert2-react-content"
 import AdminProfile from "../AdminProfile/AdminProfile"
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
 
 function Profile() {
 
@@ -25,6 +26,9 @@ function Profile() {
     const navigate = useNavigate()
 
     const MySwal = withReactComponent(Swal)
+
+    const [cookies, setCookie, removeCookie] = useCookies(['authToken']);
+    console.log({cookies})
 
     const notify = (message) =>
         toast.success(`¡${message}!`, {

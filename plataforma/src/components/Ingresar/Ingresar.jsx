@@ -35,7 +35,6 @@ function Ingresar() {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 301) {
-                    console.log({data})
                     setData(data)
                     navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
