@@ -57,7 +57,7 @@ function Profile() {
                     navigate("/ingresar")
                 } else if (data.code === 200) {
                     setUser(data)
-                    setCookie("authToken", data.token)
+                    setCookie("authToken", `${data.token}`)
                 }
             })
             .catch((e) => {
