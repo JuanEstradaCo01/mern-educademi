@@ -24,7 +24,7 @@ function Ingresar() {
 
         document.getElementById("formIngresar").reset()
 
-        await fetch(`/login`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/login`, {
             method: "POST",
             credentials: 'include', 
             headers: {
