@@ -118,7 +118,6 @@ sessionRouter.post("/login", async (req, res) => {
         console.log("✅ Iniciaste sesion")
 
         return res.cookie("authToken", `${accessToken}`, {
-            signed: true,
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
@@ -134,7 +133,7 @@ sessionRouter.post("/login", async (req, res) => {
 
 sessionRouter.post("/logout", (req, res) => {
     try {
-        const token = req.signedCookies.authToken
+        const token = req.cookies.authToken
 
         if (token === undefined) {
             return res.status(404).json({
@@ -145,7 +144,7 @@ sessionRouter.post("/logout", (req, res) => {
 
         console.log("⛔ Sesion cerrada")
 
-        return res.status(200).clearCookie("authToken").json({
+        return res.clearCookie("authToken").json({
             code: 200,
             message: "Sesion cerrada"
         })
