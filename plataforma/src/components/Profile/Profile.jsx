@@ -39,12 +39,7 @@ function Profile() {
     });
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "authToken": `${user.token}`
-            },
-        })
+        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
             .then(res => res.json())
             .then(data => {
                 if (data.code !== 200) {

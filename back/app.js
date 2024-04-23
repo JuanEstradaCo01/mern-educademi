@@ -13,9 +13,9 @@ MongoSingleton.getConnection()
 const app = server()
 
 app.use(cors({
-    credentials: true,
     origin: "https://mern-educademi.vercel.app",
-  }))
+    credentials: true
+}))
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
 app.use(cookieParser("SecretCookieAuthJWT"))
