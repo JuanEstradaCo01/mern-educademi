@@ -122,7 +122,7 @@ sessionRouter.post("/login", async (req, res) => {
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
-            domain: "https://mern-educademi.onrender.com"
+            domain: "mern-educademi.onrender.com"
         }).json(body)
     } catch (e) {
         return res.status(500).json({
