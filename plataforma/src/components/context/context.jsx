@@ -79,7 +79,7 @@ function Userprovider(props) {
     async function cerrarSesion() {
         await fetch(`${process.env.REACT_APP_URL_BACK}/logout`, {
             method: "POST",
-            credentials: "include",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
