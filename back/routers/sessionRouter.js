@@ -118,7 +118,6 @@ sessionRouter.post("/login", async (req, res) => {
         console.log("✅ Iniciaste sesion")
 
         return res.status(301).cookie("authToken", `${accessToken}`, {
-            signed: true, 
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
