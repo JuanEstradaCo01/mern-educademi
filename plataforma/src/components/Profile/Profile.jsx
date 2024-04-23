@@ -39,7 +39,9 @@ function Profile() {
     });
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
+            credentials: 'include'
+        })
             .then(res => res.json())
             .then(data => {
                 if (data.code !== 200) {
