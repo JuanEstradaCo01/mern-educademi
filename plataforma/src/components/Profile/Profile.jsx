@@ -16,8 +16,6 @@ function Profile() {
 
     const { uid } = useParams()
 
-    const { token } = useParams()
-
     agregarId(uid)
 
     const [user, setUser] = useState("")
@@ -41,7 +39,12 @@ function Profile() {
     });
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}/${token}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "authToken": `${user.token}`
+            },
+        })
             .then(res => res.json())
             .then(data => {
                 if (data.code !== 200) {
