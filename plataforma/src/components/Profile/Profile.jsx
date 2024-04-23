@@ -9,11 +9,8 @@ import withReactComponent from "sweetalert2-react-content"
 import AdminProfile from "../AdminProfile/AdminProfile"
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import Cookies from "universal-cookie"
 
 function Profile() {
-
-    const cookies = new Cookies()
 
     const { agregarUser, agregarId, cerrarSesion } = useContext(userContext)
 
@@ -41,7 +38,7 @@ function Profile() {
             draggable: true,
             progress: undefined,
             theme: "dark"
-        });
+    });
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}/${token}`)
@@ -58,8 +55,6 @@ function Profile() {
                     navigate("/ingresar")
                 } else if (data.code === 200) {
                     setUser(data)
-                    const authCookie = cookies.get("authToken")
-                    console.log({ authCookie })
                 }
             })
             .catch((e) => {
