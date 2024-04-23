@@ -118,6 +118,7 @@ sessionRouter.post("/login", async (req, res) => {
         console.log("✅ Iniciaste sesion")
 
         return res.cookie("authToken", `${accessToken}`, {
+            signed: true,
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
@@ -133,7 +134,7 @@ sessionRouter.post("/login", async (req, res) => {
 
 sessionRouter.post("/logout", (req, res) => {
     try {
-        const token = req.cookies.authToken
+        const token = req.signedCookies.authToken
 
         if (token === undefined) {
             return res.status(404).json({

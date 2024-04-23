@@ -18,7 +18,7 @@ app.use(cors({
 }))
 app.use(server.json())
 app.use(server.urlencoded({extended: true}))
-app.use(cookieParser())
+app.use(cookieParser("SecretCookieAuthJWT"))
 
 const PORT = process.env.PORT || 8080
 
