@@ -144,7 +144,7 @@ sessionRouter.post("/logout", (req, res) => {
 
         console.log("⛔ Sesion cerrada")
 
-        return res.status(200).clearCookie("authToken").json({
+        return res.clearCookie("authToken").json({
             code: 200,
             message: "Sesion cerrada"
         })
