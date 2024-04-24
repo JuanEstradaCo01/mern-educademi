@@ -120,9 +120,7 @@ sessionRouter.post("/login", async (req, res) => {
         return res.cookie("authToken", `${accessToken}`, {
             httpOnly: true, 
             secure: true, 
-            sameSite: "none",
-            path: "/",
-            domain: "mern-educademi.vercel.app"
+            sameSite: "none"
         }).json(body)
     } catch (e) {
         return res.status(500).json({
