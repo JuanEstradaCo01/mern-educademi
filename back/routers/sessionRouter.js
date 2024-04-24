@@ -104,7 +104,7 @@ sessionRouter.post("/login", async (req, res) => {
             return res.status(401).json(body)
         }
 
-        body.code = 301
+        body.code = 200
         body.uid = findUser._id.toString()
         delete body.pass
 
@@ -117,8 +117,7 @@ sessionRouter.post("/login", async (req, res) => {
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
 
-        return res.cookie("authToken", `${accessToken}`, {
-            signed: true,
+        return res.status(200).cookie("authToken", `${accessToken}`, {
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
@@ -134,7 +133,7 @@ sessionRouter.post("/login", async (req, res) => {
 
 sessionRouter.post("/logout", (req, res) => {
     try {
-        const token = req.signedCookies.authToken
+        const token = req.cookies.authToken
 
         if (token === undefined) {
             return res.status(404).json({
