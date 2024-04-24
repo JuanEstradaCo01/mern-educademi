@@ -200,7 +200,7 @@ sessionRouter.post("/recuperarcontrasena", async (req, res) => {
             <h1>Recuperar la contraseña de tu cuenta Educademi:</h1>
             <h3>¡Hola, ${user.names}!</h3>
             <p>Solicitaste la recuperacion de contraseña de tu cuenta Educademi.</p>
-            <p>Para restablecer tu contraseña da click <a href="http://localhost:3000/recuperandocontrasena/${user._id}">AQUI</a> y sigue con los pasos, gracias por preferirnos.</p>
+            <p>Para restablecer tu contraseña da click <a href="${process.env.URL}/recuperandocontrasena/${user._id}">AQUI</a> y sigue con los pasos, gracias por preferirnos.</p>
             <hr/>
             <footer><h4>Att: team Educademi</h4></footer>
         </div>`
