@@ -25,7 +25,9 @@ function GestionUsuarios() {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`, {
+            credentials: "include"
+        })
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
