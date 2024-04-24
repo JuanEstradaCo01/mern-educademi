@@ -76,7 +76,7 @@ userRouter.get("/user/:uid", async (req, res) => {
 
 userRouter.get("/users/:adminId", authAdmin, async (req, res) => {
     try {
-        const authCookie = req.signedCookies.authToken
+        const authCookie = req.cookies.authToken
         if (authCookie === undefined) {
             return res.status(401).json({
                 code: 401,
