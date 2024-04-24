@@ -57,6 +57,7 @@ function GestionUsuarios() {
     async function deleteUser(itemId) {
         await fetch(`${process.env.REACT_APP_URL_BACK}/delete/${itemId}/${userId}`, {
             method: "DELETE",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -64,7 +65,9 @@ function GestionUsuarios() {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 200) {
-                    fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`)
+                    fetch(`${process.env.REACT_APP_URL_BACK}/users/${userId}`, {
+                        credentials: 'include',
+                    })
                         .then(res => res.json())
                         .then(data => {
                             setUsers(data)

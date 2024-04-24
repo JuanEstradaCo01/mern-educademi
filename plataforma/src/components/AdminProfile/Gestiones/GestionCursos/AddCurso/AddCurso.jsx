@@ -55,6 +55,7 @@ function AddCurso() {
 
         await fetch(`${process.env.REACT_APP_URL_BACK}/${area}/addcurso`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },

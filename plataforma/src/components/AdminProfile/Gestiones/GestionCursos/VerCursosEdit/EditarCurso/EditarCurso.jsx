@@ -67,7 +67,9 @@ function EditarCurso() {
         });
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`, {
+            credentials: 'include',
+        })
             .then(res => res.json())
             .then(data => {
                 setCourse(data)
@@ -92,6 +94,7 @@ function EditarCurso() {
 
         await fetch(`${process.env.REACT_APP_URL_BACK}/editarcurso/${areaCurso}/${course._id}/${userId}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
@@ -100,7 +103,9 @@ function EditarCurso() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         setCourse(data)

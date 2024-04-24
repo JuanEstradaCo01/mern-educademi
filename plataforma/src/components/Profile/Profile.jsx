@@ -82,6 +82,7 @@ function Profile() {
     async function eliminarCurso(cid) {
         await fetch(`${process.env.REACT_APP_URL_BACK}/desinscribir/${uid}/${cid}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -89,7 +90,9 @@ function Profile() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         if (data.code !== 200) {
