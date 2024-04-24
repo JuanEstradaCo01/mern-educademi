@@ -43,7 +43,7 @@ const authAdmin = async (req, res, next) => {
 //Inscribirse a un curso:
 courseRouter.post("/:area/inscribirse/:cid", async (req, res) => {
     try {
-        const authCookie = req.cookies.authToken
+        const authCookie = req.signedCookies.authToken
         if(authCookie === undefined){
             return res.status(401).json({
                 code: 401,
