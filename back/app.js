@@ -12,13 +12,13 @@ MongoSingleton.getConnection()
 
 const app = server()
 
+app.use(cookieParser())
+app.use(server.json())
+app.use(server.urlencoded({extended: true}))
 app.use(cors({
     origin: "https://mern-educademi.vercel.app",
     credentials: true
 }))
-app.use(server.json())
-app.use(server.urlencoded({extended: true}))
-app.use(cookieParser())
 
 const PORT = process.env.PORT || 8080
 
