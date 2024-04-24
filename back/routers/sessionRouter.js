@@ -118,11 +118,12 @@ sessionRouter.post("/login", async (req, res) => {
         console.log("✅ Iniciaste sesion")
 
         return res.cookie("authToken", `${accessToken}`, {
+            maxAge: 3600000, //1 hora
             httpOnly: true, 
             secure: true, 
             sameSite: "none",
             path: "/",
-            domain: "mern-educademi.onrender.com"
+            domain: "mern-educademi.vercel.app"
         }).json(body)
     } catch (e) {
         return res.status(500).json({
