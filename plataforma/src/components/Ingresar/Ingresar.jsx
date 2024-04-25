@@ -9,7 +9,6 @@ function Ingresar() {
 
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
-    const [data, setData] = useState({})
     const navigate = useNavigate();
 
     const MySwal = withReactComponent(Swal)
@@ -34,9 +33,7 @@ function Ingresar() {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.code === 301) {
-                    console.log({data})
-                    setData(data)
+                if (data.code === 200) {
                     navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
                     MySwal.fire({
@@ -77,6 +74,5 @@ function Ingresar() {
         </div>
     )
 }
-
 
 export default Ingresar;
