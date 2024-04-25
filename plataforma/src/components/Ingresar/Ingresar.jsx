@@ -9,7 +9,6 @@ function Ingresar() {
 
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
-    const [data, setData] = useState({})
     const navigate = useNavigate();
 
     const MySwal = withReactComponent(Swal)
@@ -24,9 +23,9 @@ function Ingresar() {
 
         document.getElementById("formIngresar").reset()
 
-        await fetch(`/login`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/login`, {
             method: "POST",
-            credentials: 'include',
+            credentials: 'include', 
             headers: {
                 "Content-Type": "application/json",
             },
@@ -34,8 +33,7 @@ function Ingresar() {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.code === 301) {
-                    setData(data)
+                if (data.code === 200) {
                     navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
                     MySwal.fire({
@@ -76,6 +74,5 @@ function Ingresar() {
         </div>
     )
 }
-
 
 export default Ingresar;

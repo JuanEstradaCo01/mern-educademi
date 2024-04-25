@@ -39,7 +39,9 @@ function Profile() {
     });
 
     useEffect(() => {
-        fetch(`/user/${uid}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
+            credentials: "include"
+        })
             .then(res => res.json())
             .then(data => {
                 if (data.code !== 200) {
@@ -60,7 +62,7 @@ function Profile() {
             })
     }, [])
 
-    async function validarDelete(itemId){
+    async function validarDelete(itemId) {
         return Swal.fire({
             title: "¿Estas seguro?",
             text: "Esta accion es irreversible.",
@@ -70,16 +72,17 @@ function Profile() {
             cancelButtonColor: "#d33",
             confirmButtonText: "Eliminar",
             allowOutsideClick: false,
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 eliminarCurso(itemId)
-              }
-          });
+            }
+        });
     }
 
     async function eliminarCurso(cid) {
         await fetch(`${process.env.REACT_APP_URL_BACK}/desinscribir/${uid}/${cid}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -87,7 +90,9 @@ function Profile() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/user/${uid}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         if (data.code !== 200) {

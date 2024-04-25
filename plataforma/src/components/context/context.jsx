@@ -34,8 +34,9 @@ function Userprovider(props) {
     }
 
     async function inscribirse(courseArea, courseId) {
-        await fetch(`/${courseArea}/inscribirse/${courseId}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/${courseArea}/inscribirse/${courseId}`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -79,6 +80,7 @@ function Userprovider(props) {
     async function cerrarSesion() {
         await fetch(`${process.env.REACT_APP_URL_BACK}/logout`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },

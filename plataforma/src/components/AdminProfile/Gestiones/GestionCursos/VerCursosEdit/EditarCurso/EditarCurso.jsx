@@ -67,7 +67,9 @@ function EditarCurso() {
         });
 
     useEffect(() => {
-        fetch(`/${areaCurso}/${cid}/${userId}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`, {
+            credentials: 'include',
+        })
             .then(res => res.json())
             .then(data => {
                 setCourse(data)
@@ -90,8 +92,9 @@ function EditarCurso() {
             conocimientosPrevios:valorEditarConocimientosPrevios
         }
 
-        await fetch(`/editarcurso/${areaCurso}/${course._id}/${userId}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/editarcurso/${areaCurso}/${course._id}/${userId}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
@@ -100,7 +103,9 @@ function EditarCurso() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`/${areaCurso}/${cid}/${userId}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}/${cid}/${userId}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         setCourse(data)
@@ -146,7 +151,7 @@ function EditarCurso() {
                 {(editTitulacion === false) ? <p><Button onClick={() => { setEditTitulacion(true) }} variant="dark">🖊</Button><strong>Titulación: </strong>{course.titulacion}</p> :
                     <form id="formEditCourse">
                         <label><p><Button onClick={() => { setEditTitulacion(true) }} variant="dark">🖊</Button><strong>Titulación: </strong></p></label>
-                        <input className="inputEditar" onChange={(e) => { setValorEditarTitulacion(e.target.value) }} type="text" placeholder="Ingresa el nuevo nombre" />
+                        <input className="inputEditar" onChange={(e) => { setValorEditarTitulacion(e.target.value) }} type="text" placeholder="Ingresa la nueva titulacion" />
                         <button className="cancelEditUser" onClick={() => { setEditTitulacion(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
                         <button onClick={actualizar} className="editUserSuccess" type="submit" ><FiCheck className="editUserSuccessIcon" /></button>
                     </form>
@@ -155,7 +160,7 @@ function EditarCurso() {
                 {(editDuracion === false) ? <p><Button onClick={() => { setEditDuracion(true) }} variant="dark">🖊</Button><strong>Duración: </strong>{(course.duracion === 1) ? <span>{course.duracion} año</span> : <span>{course.duracion} años</span>}</p> :
                     <form id="formEditCourse">
                         <label><p><Button onClick={() => { setEditDuracion(true) }} variant="dark">🖊</Button><strong>Duración: </strong></p></label>
-                        <input className="inputEditar" onChange={(e) => { setValorEditarDuracion(e.target.value) }} type="text" placeholder="Ingresa el nuevo nombre" />
+                        <input className="inputEditar" onChange={(e) => { setValorEditarDuracion(e.target.value) }} type="number" placeholder="Ingresa la nueva duracion" />
                         <button className="cancelEditUser" onClick={() => { setEditDuracion(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
                         <button onClick={actualizar} className="editUserSuccess" type="submit" ><FiCheck className="editUserSuccessIcon" /></button>
                     </form>
@@ -164,7 +169,7 @@ function EditarCurso() {
                 {(editConocimientosPrevios === false) ? <p><Button onClick={() => { setEditConocimientosPrevios(true) }} variant="dark">🖊</Button><strong>Conocimientos Previos: </strong>{course.conocimientosPrevios}</p>  :
                     <form id="formEditCourse">
                         <label><p><Button onClick={() => { setEditConocimientosPrevios(true) }} variant="dark">🖊</Button><strong>Conocimientos Previos: </strong></p></label>
-                        <input className="inputEditar" onChange={(e) => { setValorEditarConocimientosPrevios(e.target.value) }} type="text" placeholder="Ingresa el nuevo nombre" />
+                        <input className="inputEditar" onChange={(e) => { setValorEditarConocimientosPrevios(e.target.value) }} type="text" placeholder="Ingresa los conocimientos" />
                         <button className="cancelEditUser" onClick={() => { setEditConocimientosPrevios(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
                         <button onClick={actualizar} className="editUserSuccess" type="submit" ><FiCheck className="editUserSuccessIcon" /></button>
                     </form>
@@ -173,13 +178,11 @@ function EditarCurso() {
                 {(editDescripcion === false) ? <p><Button onClick={() => { setEditDescripcion(true) }} variant="dark">🖊</Button><strong>Descripción: </strong>{course.descripcion}</p>  :
                     <form id="formEditCourse">
                         <label><p><Button onClick={() => { setEditDescripcion(true) }} variant="dark">🖊</Button><strong>Conocimientos Previos: </strong></p></label>
-                        <input className="inputEditar" onChange={(e) => { setValorEditarDescripcion(e.target.value) }} type="text" placeholder="Ingresa el nuevo nombre" />
+                        <input className="inputEditar" onChange={(e) => { setValorEditarDescripcion(e.target.value) }} type="text" placeholder="Ingresa la nueva descripcion" />
                         <button className="cancelEditUser" onClick={() => { setEditDescripcion(false) }}><FiXCircle className="cancelEditUserIcon" /></button>
                         <button onClick={actualizar} className="editUserSuccess" type="submit" ><FiCheck className="editUserSuccessIcon" /></button>
                     </form>
                 }
-
-
             </div>
             <ToastContainer />
         </main>

@@ -54,7 +54,9 @@ function EditUsuarios() {
     }
 
     useEffect(() => {
-        fetch(`/edituser/${uid}/${adminId}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
+            credentials: 'include',
+        })
             .then(res => res.json())
             .then(data => {
                 setUser(data)
@@ -86,7 +88,7 @@ function EditUsuarios() {
             draggable: true,
             progress: undefined,
             theme: "dark"
-        });
+    });
 
     const actualizar = async (evt) => {
         evt.preventDefault()
@@ -101,8 +103,9 @@ function EditUsuarios() {
             phone: valorEditarPhone
         }
 
-        await fetch(`/edituser/${uid}/${adminId}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },
@@ -111,7 +114,9 @@ function EditUsuarios() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`/edituser/${uid}/${adminId}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         setUser(data)
@@ -143,8 +148,9 @@ function EditUsuarios() {
     }
 
     async function desinscribir(cid) {
-        await fetch(`/desinscribir/${uid}/${cid}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/desinscribir/${uid}/${cid}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -152,7 +158,9 @@ function EditUsuarios() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`/edituser/${uid}/${adminId}`)
+                fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
+                    credentials: 'include',
+                })
                     .then(res => res.json())
                     .then(data => {
                         setUser(data)

@@ -27,7 +27,9 @@ function VerCursosEdit() {
     }
 
     useEffect(() => {
-        fetch(`/${areaCurso}`)
+        fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}`, {
+            credentials: 'include',
+        })
             .then(res => res.json())
             .then(data => {
                 setCursos(data)
@@ -57,6 +59,7 @@ function VerCursosEdit() {
     async function deleteCourse(item) {
         await fetch(`${process.env.REACT_APP_URL_BACK}/eliminar/${item.area}/${item._id}/${userId}`, {
             method: "DELETE",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             }
@@ -64,7 +67,9 @@ function VerCursosEdit() {
             .then(res => res.json())
             .then(data => {
                 if (data.code === 200) {
-                    fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}`)
+                    fetch(`${process.env.REACT_APP_URL_BACK}/${areaCurso}`, {
+                        credentials: 'include',
+                    })
                         .then(res => res.json())
                         .then(data => {
                             setCursos(data)

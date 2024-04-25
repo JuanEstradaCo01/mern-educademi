@@ -83,8 +83,8 @@ sessionRouter.post("/login", async (req, res) => {
         if (user === "" || pass === "") {
             let body = req.body
             body.message = "Completa todos los campos"
-            body.code = 404
-            return res.status(404).json(body)
+            body.code = 401
+            return res.status(401).json(body)
         }
 
         const users = await userDao.getUsers()
@@ -92,9 +92,9 @@ sessionRouter.post("/login", async (req, res) => {
 
         //Valido si existe el correo en la DB:
         if (!findUser) {
-            body.code = 401
+            body.code = 404
             body.message = "Usuario no registrado"
-            return res.status(401).json(body)
+            return res.status(404).json(body)
         }
 
         //Valido si la contraseña es correcta:
@@ -104,7 +104,7 @@ sessionRouter.post("/login", async (req, res) => {
             return res.status(401).json(body)
         }
 
-        body.code = 301
+        body.code = 200
         body.uid = findUser._id.toString()
         delete body.pass
 
@@ -117,7 +117,14 @@ sessionRouter.post("/login", async (req, res) => {
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
 
-        return res.status(301).cookie("authToken", `${accessToken}`, {signed: true}).json(body)
+        return res.cookie("authToken", `${accessToken}`, {
+            maxAge: 3600000, //1 hora
+            httpOnly: true, 
+            secure: true, 
+            sameSite: "none",
+            path: "/",
+            domain: "mern-educademi.onrender.com"
+        }).json(body)
     } catch (e) {
         return res.status(500).json({
             error: "Ocurrio un error al iniciar sesion", e
@@ -127,7 +134,7 @@ sessionRouter.post("/login", async (req, res) => {
 
 sessionRouter.post("/logout", (req, res) => {
     try {
-        const token = req.signedCookies.authToken
+        const token = req.cookies.authToken
 
         if (token === undefined) {
             return res.status(404).json({
@@ -138,7 +145,7 @@ sessionRouter.post("/logout", (req, res) => {
 
         console.log("⛔ Sesion cerrada")
 
-        return res.status(200).clearCookie("authToken").json({
+        return res.clearCookie("authToken").json({
             code: 200,
             message: "Sesion cerrada"
         })
@@ -193,7 +200,7 @@ sessionRouter.post("/recuperarcontrasena", async (req, res) => {
             <h1>Recuperar la contraseña de tu cuenta Educademi:</h1>
             <h3>¡Hola, ${user.names}!</h3>
             <p>Solicitaste la recuperacion de contraseña de tu cuenta Educademi.</p>
-            <p>Para restablecer tu contraseña da click <a href="http://localhost:3000/recuperandocontrasena/${user._id}">AQUI</a> y sigue con los pasos, gracias por preferirnos.</p>
+            <p>Para restablecer tu contraseña da click <a href="https://mern-educademi.vercel.app/recuperandocontrasena/${user._id}">AQUI</a> y sigue con los pasos, gracias por preferirnos.</p>
             <hr/>
             <footer><h4>Att: team Educademi</h4></footer>
         </div>`

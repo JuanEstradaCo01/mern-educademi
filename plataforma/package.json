@@ -1,7 +1,6 @@
 {
   "name": "plataforma",
   "version": "0.1.0",
-  "proxy": "https://mern-educademi.onrender.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -17,6 +16,7 @@
     "react-toastify": "^10.0.5",
     "sweetalert2": "^11.10.5",
     "sweetalert2-react-content": "^5.0.7",
+    "universal-cookie": "^7.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
