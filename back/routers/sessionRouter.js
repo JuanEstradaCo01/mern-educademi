@@ -116,6 +116,7 @@ sessionRouter.post("/login", async (req, res) => {
         body.token = accessToken
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
+        
 
         return res.cookie("authToken", `${accessToken}`, {
             maxAge: 3600000, //1 hora
