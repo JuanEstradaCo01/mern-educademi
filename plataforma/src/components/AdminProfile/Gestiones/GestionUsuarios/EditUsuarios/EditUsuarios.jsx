@@ -54,7 +54,7 @@ function EditUsuarios() {
     }
 
     useEffect(() => {
-        fetch(`/edituser/${uid}/${adminId}`, {
+        fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
             credentials: 'include',
         })
             .then(res => res.json())
@@ -103,7 +103,7 @@ function EditUsuarios() {
             phone: valorEditarPhone
         }
 
-        await fetch(`/edituser/${uid}/${adminId}`, {
+        await fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
             method: "POST",
             credentials: 'include',
             headers: {
@@ -114,7 +114,7 @@ function EditUsuarios() {
             .then(res => res.json())
             .then(data => {
                 notify(data.message)
-                fetch(`/edituser/${uid}/${adminId}`, {
+                fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
                     credentials: 'include',
                 })
                     .then(res => res.json())
