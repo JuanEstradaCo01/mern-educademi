@@ -83,8 +83,8 @@ sessionRouter.post("/login", async (req, res) => {
         if (user === "" || pass === "") {
             let body = req.body
             body.message = "Completa todos los campos"
-            body.code = 404
-            return res.status(404).json(body)
+            body.code = 401
+            return res.status(401).json(body)
         }
 
         const users = await userDao.getUsers()
@@ -92,9 +92,9 @@ sessionRouter.post("/login", async (req, res) => {
 
         //Valido si existe el correo en la DB:
         if (!findUser) {
-            body.code = 401
+            body.code = 404
             body.message = "Usuario no registrado"
-            return res.status(401).json(body)
+            return res.status(404).json(body)
         }
 
         //Valido si la contraseña es correcta:
@@ -124,7 +124,7 @@ sessionRouter.post("/login", async (req, res) => {
             secure: true, 
             sameSite: "none",
             path: "/",
-            domain: "mern-educademi.vercel.app"
+            domain: "mern-educademi.onrender.com"
         }).json(body)
     } catch (e) {
         return res.status(500).json({

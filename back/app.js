@@ -20,7 +20,7 @@ app.use(cors({
     credentials: true
 }))
 
-const PORT = process.env.PORT || 10000
+const PORT = process.env.PORT || 8080
 
 const httpServer = app.listen(PORT, () => console.log(`Server on port ${PORT}`))
 
