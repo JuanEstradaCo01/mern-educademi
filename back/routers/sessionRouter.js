@@ -116,7 +116,7 @@ sessionRouter.post("/login", async (req, res) => {
         body.token = accessToken
         body.message = "Usuario autenticado correctamente"
         console.log("✅ Iniciaste sesion")
-        
+
 
         return res.cookie("authToken", `${accessToken}`, {
             maxAge: 3600000, //1 hora
@@ -124,7 +124,7 @@ sessionRouter.post("/login", async (req, res) => {
             secure: true, 
             sameSite: "none",
             path: "/",
-            domain: "https://mern-educademi.vercel.app"
+            domain: "mern-educademi.vercel.app"
         }).json(body)
     } catch (e) {
         return res.status(500).json({
