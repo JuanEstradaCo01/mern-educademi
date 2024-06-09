@@ -369,7 +369,7 @@ courseRouter.get("/:area/:cid/:adminId", authAdmin, async (req, res) => {
     }
 })
 
-courseRouter.post("/editarcurso/:area/:cid/:adminId", authAdmin, async (req, res) => {
+courseRouter.put("/editarcurso/:area/:cid/:adminId", authAdmin, async (req, res) => {
     try{
         const area = req.params.area
         const cid = req.params.cid
