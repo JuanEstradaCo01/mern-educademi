@@ -149,7 +149,7 @@ userRouter.get("/edituser/:uid/:adminId", authAdmin, async (req, res) => {
     }
 })
 
-userRouter.post("/edituser/:uid/:adminId", authAdmin, async (req, res) => {
+userRouter.put("/edituser/:uid/:adminId", authAdmin, async (req, res) => {
     try {
         const uid = req.params.uid
         const user = await userDao.getUserById(uid)
