@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2"
 import withReactComponent from "sweetalert2-react-content"
 import { useNavigate } from "react-router-dom"
+import MiniLoader from "../MiniLoader/MiniLoader"
 
 function Registrar() {
 
@@ -13,6 +14,7 @@ function Registrar() {
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [pass, setPass] = useState("")
+    const [miniLoader, setMiniLoader] = useState(false)
 
     const navigate = useNavigate();
 
@@ -32,6 +34,8 @@ function Registrar() {
 
         document.getElementById("formRegister").reset()
 
+        setMiniLoader(true)
+
         const user = ({
             names: nombres,
             lastNames: apellidos,
@@ -50,6 +54,7 @@ function Registrar() {
         })
             .then(res => res.json())
             .then(data => {
+                setMiniLoader(false)
                 if (data.code === 201) {
                     notifySuccess()
                     navigate("/ingresar")
@@ -98,12 +103,12 @@ function Registrar() {
                             <input onChange={(e) => { setPass(e.target.value) }} id="pass" type="password" placeholder="Ingresa tu contraseña" required />
                         </label>
 
-                        <Button onClick={registrarme} className="btnRegistrar" type="submit" variant="primary">Registrarme</Button>{' '}
+                        {(miniLoader === true) ? <><Button onClick={registrarme} className="btnRegistrar" type="submit" variant="primary"><MiniLoader /></Button>{' '}</> : <><Button onClick={registrarme} className="btnRegistrar" type="submit" variant="primary">Registrarme</Button>{' '}</>}
                     </form>
                 </div>
             </div>
         </>
     )
 }
-
+<MiniLoader />
 export default Registrar;

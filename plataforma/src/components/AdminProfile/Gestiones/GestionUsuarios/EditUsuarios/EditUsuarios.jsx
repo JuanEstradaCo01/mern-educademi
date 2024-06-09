@@ -104,7 +104,7 @@ function EditUsuarios() {
         }
 
         await fetch(`${process.env.REACT_APP_URL_BACK}/edituser/${uid}/${adminId}`, {
-            method: "POST",
+            method: "PUT",
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",

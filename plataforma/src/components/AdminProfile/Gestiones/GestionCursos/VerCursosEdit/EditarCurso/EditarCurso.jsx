@@ -93,7 +93,7 @@ function EditarCurso() {
         }
 
         await fetch(`${process.env.REACT_APP_URL_BACK}/editarcurso/${areaCurso}/${course._id}/${userId}`, {
-            method: "POST",
+            method: "PUT",
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
