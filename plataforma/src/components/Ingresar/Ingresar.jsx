@@ -4,17 +4,21 @@ import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import withReactComponent from "sweetalert2-react-content"
+import MiniLoader from "../MiniLoader/MiniLoader";
 
 function Ingresar() {
 
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const [miniLoader, setMiniLoader] = useState(false)
 
     const MySwal = withReactComponent(Swal)
 
     const ingresar = async (evt) => {
         evt.preventDefault()
+
+        setMiniLoader(true)
 
         const data = ({
             user: user,
@@ -33,6 +37,7 @@ function Ingresar() {
         })
             .then(res => res.json())
             .then(data => {
+                setMiniLoader(false)
                 if (data.code === 200) {
                     navigate(`/user/${data.uid}`)
                 }else if (data.code === 404 || 401) {
@@ -64,7 +69,8 @@ function Ingresar() {
                             <input id="usuarioContra" onChange={(e) => { setPass(e.target.value) }} type="password" name="password" placeholder=" Contraseña" required />
                         </label>
 
-                        <Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar">Ingresar</Button>
+                        {(miniLoader === true) ? <><Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar"><MiniLoader /></Button></> : <Button onClick={ingresar} id="btnIngresar" variant="success" type="submit" className="btnIngresar">Ingresar</Button>}
+
                     </form>
 
                     <Link to={"/recuperarcontraseña"}><p>¿Olvidaste tu contraseña?</p></Link>
